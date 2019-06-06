@@ -29,8 +29,11 @@ while getopts "n" o; do
 done
 shift $((OPTIND-1))
 
-rm -rf ${OUTDIR}
-mkdir -p ${OUTDIR}
+mkdir -p ${OUTDIR}/tmp
+mv ${OUTDIR}/*.pdf ${OUTDIR}/tmp || true
+rm -f ${OUTDIR}/*.*
+mv ${OUTDIR}/tmp/*.pdf ${OUTDIR}
+rm -rf ${OUTDIR}/tmp
 
 if [ -n "$CI_BUILD_REF" ];
 then
