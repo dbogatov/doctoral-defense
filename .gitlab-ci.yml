@@ -1,0 +1,58 @@
+stages:
+- lint
+- build
+- build-review
+- review
+- release
+
+# CHANGE ME!
+variables:
+  AUTHPASSWORD: "example" # change to "" (empty string) to disable authentication
+  # username is always "review" (without quotes)
+
+include:
+  # BEFORE SCRIPT
+  - project: 'templates/ci-snippets'
+    file: 'variables.yml'
+
+  # LINT
+  - project: 'templates/ci-snippets'
+    file: 'latex-report/chktex.yml'
+  
+  - project: 'templates/ci-snippets'
+    file: 'latex-report/cspell.yml'
+
+  # BUILD
+  - project: 'templates/ci-snippets'
+    file: 'latex-report/build.yml'
+
+  # BUILD REVIEW
+  - project: 'templates/ci-snippets'
+    file: 'latex-review-apps/build-review.yml'
+
+  # REVIEW
+  - project: 'templates/ci-snippets'
+    file: 'latex-review-apps/review.yml'
+
+  - project: 'templates/ci-snippets'
+    file: 'latex-review-apps/stop-review.yml'
+
+  # RELEASE
+  - project: 'templates/ci-snippets'
+    file: 'latex-report/artifacts.yml'
+
+# ADJUSTMENTS
+
+build-review:
+  except: []
+
+review:
+  except: []
+
+stop_review:
+  except: []
+
+build:
+  script:
+  - ./document/build.sh
+  - ./document/build.sh -n

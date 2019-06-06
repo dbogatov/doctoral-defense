@@ -1,0 +1,124 @@
+% cSpell:disable
+
+% CLI arguments
+
+\ifdefined\generatenotes%
+	\newcommand{\notesOption}{show notes on second screen}%
+\else
+	\newcommand{\notesOption}{hide notes}%
+\fi
+
+% packages
+
+\usepackage{pgfpages}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{fancybox}
+\usepackage{bm}
+\usepackage{multicol}
+\usepackage{xpatch}
+\usepackage{hyperref}
+\usepackage{hyperxmp}
+\usepackage{multirow}
+\usepackage{xparse}
+\usepackage{caption}
+
+\usepackage[
+	backend=biber,
+	style=alphabetic,
+	sorting=ynt
+]{biblatex}
+
+\usepackage[printwatermark]{xwatermark}
+\usepackage{ifthen}
+
+% settings
+
+\graphicspath{{./graphics/}}
+
+\setbeameroption{\notesOption}
+
+\makeatletter
+\let\@@magyar@captionfix\relax % chktex 21
+\makeatother
+
+\logo{
+	\includegraphics[
+		width=1cm,
+		keepaspectratio
+	]{logo.eps}\hspace{\dimexpr\paperwidth-36pt}\vspace{-30pt}
+}
+
+\addbibresource{bibfile.bib}
+
+\makeatletter
+	\def\beamer@framenotesbegin{% at beginning of slide
+		\usebeamercolor[fg]{normal text} 
+			\gdef\beamer@noteitems{}%
+			\gdef\beamer@notes{}% 
+	}
+\makeatother
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=magenta,
+	urlcolor=cyan,
+	citecolor=blue,
+	pdfpagemode=FullScreen,
+	pdfdisplaydoctitle=true,
+	pdfmenubar=false,
+	pdfpagelayout=SinglePage
+}
+
+\captionsetup[figure]{labelformat=empty}
+
+\definecolor{CardinalRed}{RGB}{172,29,55} 
+\definecolor{Tangerine}{RGB}{247,148,30} 
+
+\setbeamercolor{alerted text}{fg=CardinalRed}
+\setbeamercolor{example text}{fg=Tangerine}
+{
+	\usebeamercolor[fg]{alerted text}
+	\usebeamercolor[fg]{example text}
+}
+
+% definitions
+
+\newcommand{\BigO}[1]{\mathcal{O}\left(#1\right)}
+\newcommand{\BigOmega}[1]{\Omega\left(#1\right)}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\newsavebox{\mybox}
+\newsavebox{\tablebox}
+
+\xpatchbibmacro{name:andothers}{%
+	\bibstring{andothers}%
+}{%
+	\bibstring[\emph]{andothers}%
+}{}{}
+
+\newsavebox\watermark%
+\savebox\watermark{\tikz[color=gray,opacity=0.02]\node{\wm};}
+\newwatermark*[
+	allpages,
+	angle=0,
+	scale=3,
+	xpos=0,
+	ypos=-25
+]{\usebox\watermark}
+
+\makeatletter
+	\newcommand{\manuallabel}[2]{\def\@currentlabel{#2}\label{#1}} % chktex 21
+\makeatother
+
+\newenvironment<>{fixblock}[1]{%
+	\begin{block}{#1}
+		\vspace{0pt}
+		#2
+}{
+	\end{block}
+}

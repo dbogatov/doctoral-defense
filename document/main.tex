@@ -1,0 +1,26 @@
+\documentclass{beamer}
+	
+	\usetheme[
+		progressbar=frametitle,
+		titleformat section=smallcaps
+	]{metropolis}
+
+	\input{version.tex}
+	
+	\input{meta.tex}
+	
+	\input{preamble.tex}
+	
+\begin{document}
+	
+	\maketitle
+
+	\input{sections/introduction}
+	
+	\begin{frame}[allowframebreaks]{References}
+
+		\printbibliography%
+
+	\end{frame}
+	
+\end{document}
