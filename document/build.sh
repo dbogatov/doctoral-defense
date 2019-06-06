@@ -30,9 +30,9 @@ done
 shift $((OPTIND-1))
 
 mkdir -p ${OUTDIR}/tmp
-mv ${OUTDIR}/*.pdf ${OUTDIR}/tmp || true
+cp ${OUTDIR}/*.pdf ${OUTDIR}/tmp || true
 rm -f ${OUTDIR}/*.*
-mv ${OUTDIR}/tmp/*.pdf ${OUTDIR} || true
+cp ${OUTDIR}/tmp/*.pdf ${OUTDIR} || true
 rm -rf ${OUTDIR}/tmp
 
 if [ -n "$CI_BUILD_REF" ];
