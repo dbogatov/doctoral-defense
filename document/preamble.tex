@@ -1,4 +1,5 @@
 % cSpell:disable
+% chktex-file 15
 
 % CLI arguments
 
@@ -122,3 +123,6 @@
 }{
 	\end{block}
 }
+
+\newenvironment{fixnote}{\startfixnote}{}
+\def\startfixnote#1\end{\note{#1}\end} % chktex 9 chktex 14
