@@ -43,6 +43,10 @@ include:
     
   # TEST
   - project: 'templates/ci-snippets'
+    file: 'latex-report/embedded-fonts.yml'
+    ref: *ref
+  
+  - project: 'templates/ci-snippets'
     file: 'latex-report/check-links.yml'
     ref: *ref
 
