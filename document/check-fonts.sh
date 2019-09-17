@@ -6,7 +6,7 @@ set -e
 cd "${0%/*}"
 CWD=$(pwd)
 
-list=$(pdffonts ./dist/*.pdf)
+list=$(pdffonts ./dist/presentation.pdf)
 i=0
 
 while read -r line; do
