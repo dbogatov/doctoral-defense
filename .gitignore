@@ -1,3 +1,5 @@
-document/dist/
+document/dist/*
+!document/dist/.gitkeep
+
 *-eps-converted-to.pdf
 chktex*
