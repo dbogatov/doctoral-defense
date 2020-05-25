@@ -95,3 +95,7 @@ build:
   script:
     - $LATEX_BUILD/build.sh
     - $LATEX_BUILD/build.sh -n
+    - PAGES=$(wget -q -O - https://git.dbogatov.org/templates/ci-snippets/raw/master/page-count.sh | bash /dev/stdin ${PWD}/$LATEX_DIST/)
+    - |
+      echo "Max pages: $PAGES"
+    - echo "PAGES_COUNT=$PAGES" >> pages-count.env
