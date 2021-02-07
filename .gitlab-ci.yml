@@ -11,6 +11,7 @@ variables:
   AUTHPASSWORD: "example" # change to "" (empty string) to disable authentication
   # username is always "review" (without quotes)
   CI_REF: &ref 991787dfc325b9d149cd609fbd758bf97158bcc0
+  BUILD_ARGS: " | -n "
 
 include:
   # VARIABLES
@@ -79,23 +80,3 @@ include:
   - project: "templates/ci-snippets"
     file: "latex/pages.yml"
     ref: *ref
-
-# ADJUSTMENTS
-
-build-review:
-  except: []
-
-review:
-  except: []
-
-stop_review:
-  except: []
-
-build:
-  script:
-    - $LATEX_BUILD/build.sh
-    - $LATEX_BUILD/build.sh -n
-    - PAGES=$(wget -q -O - https://git.dbogatov.org/templates/ci-snippets/raw/master/page-count.sh | bash /dev/stdin ${PWD}/$LATEX_DIST/)
-    - |
-      echo "Max pages: $PAGES"
-    - echo "PAGES_COUNT=$PAGES" >> pages-count.env
