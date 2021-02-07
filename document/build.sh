@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-shopt -s extglob 
+shopt -s extglob
 
 # Ensure that the CWD is set to script's location
 cd "${0%/*}"
@@ -10,17 +10,25 @@ CWD=$(pwd)
 INTERACTION=nonstopmode
 OUTDIR=dist
 JOBNAME=presentation
-NOTES=""
+NOTES="\def\generatenotes{hide}"
 SUFFIX=""
+FAST=false
 SYNCTEX=1
 
-usage() { echo "Usage: $0 [-o]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-nsf]" 1>&2; exit 1; }
 
-while getopts "n" o; do
+while getopts "nsf" o; do
 	case "${o}" in
+		f)
+			FAST=true
+			;;
 		n)
-			NOTES="\def\generatenotes{true}"
+			NOTES="\def\generatenotes{second}"
 			SUFFIX="-with-notes"
+			;;
+		s)
+			NOTES="\def\generatenotes{only}"
+			SUFFIX="-notes"
 			;;
 		*)
 			usage
@@ -29,11 +37,15 @@ while getopts "n" o; do
 done
 shift $((OPTIND-1))
 
-mkdir -p ${OUTDIR}/tmp
-cp ${OUTDIR}/*.pdf ${OUTDIR}/tmp || true
-rm -f ${OUTDIR}/*.*
-cp ${OUTDIR}/tmp/*.pdf ${OUTDIR} || true
-rm -rf ${OUTDIR}/tmp
+if [ $FAST == false ]
+then
+	mkdir -p ${OUTDIR}/tmp
+	cp ${OUTDIR}/*.pdf ${OUTDIR}/tmp || true
+	rm -f ${OUTDIR}/*.*
+	cp ${OUTDIR}/tmp/*.pdf ${OUTDIR} || true
+	rm -rf ${OUTDIR}/tmp
+	mkdir -p ${OUTDIR}/figures
+fi
 
 if [ -n "$CI_BUILD_REF" ];
 then
@@ -49,6 +61,9 @@ latexmk -cd -f- -pdf -time \
 	-pdflatex='xelatex %O "\def\dummy{} '${NOTES}' \input %S "' \
 	main
 
-rm -f ${OUTDIR}/*.{aux,log,out,xwm,toc,lof,lot,bib,bbl,bcf,blg,xml,fls,fdb_latexmk,nav,snm}
+if [ $FAST == false ]
+then
+	rm -f ${OUTDIR}/*.{aux,log,out,xwm,toc,lof,lot,bib,bbl,bcf,blg,xml,fls,fdb_latexmk,nav,snm}
+fi
 
 echo "Done."

@@ -11,7 +11,7 @@ variables:
   AUTHPASSWORD: "example" # change to "" (empty string) to disable authentication
   # username is always "review" (without quotes)
   CI_REF: &ref 991787dfc325b9d149cd609fbd758bf97158bcc0
-  BUILD_ARGS: " | -n "
+  BUILD_ARGS: " | -n | -s "
 
 include:
   # VARIABLES

@@ -1,26 +1,43 @@
-\documentclass{beamer}
-	
-	\usetheme[
-		progressbar=frametitle,
-		titleformat section=smallcaps
-	]{metropolis}
+\documentclass[usenames,dvipsnames]{beamer}
 
-	\input{version.tex}
-	
-	\input{meta.tex}
-	
-	\input{preamble.tex}
-	
+\usetheme[
+	progressbar=frametitle,
+	titleformat section=smallcaps
+]{metropolis}
+
+\input{version}
+
+\input{meta}
+
+\input{preamble}
+
 \begin{document}
-	
+
 	\maketitle
 
 	\input{sections/introduction}
-	
+
+	\ifthenelse%
+		{\equal{\generatenotes}{only}}
+		{\nocite{*}}
+		{}
+
 	\begin{frame}[allowframebreaks]{References}
 
-		\printbibliography%
+		\bibliography{bibfile}
+
+		\note{The references}
 
 	\end{frame}
-	
+
+	\setbeamertemplate{logo}{}
+
+	\begin{frame}[standout]
+
+		\Huge\alert{Thank you for Attention!}
+
+	\end{frame}
+
+	\maketitle
+
 \end{document}

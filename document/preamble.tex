@@ -3,13 +3,26 @@
 
 % CLI arguments
 
-\ifdefined\generatenotes%
-	\newcommand{\notesOption}{show notes on second screen}%
-\else
-	\newcommand{\notesOption}{hide notes}%
-\fi
+\usepackage{ifthen}
+\ifthenelse%
+	{\equal{\generatenotes}{hide}}
+	{\newcommand{\notesOption}{hide notes}}
+	{
+		\ifthenelse%
+			{\equal{\generatenotes}{second}}
+			{\newcommand{\notesOption}{show notes on second screen}}
+			{\newcommand{\notesOption}{show only notes}}
+	}%
 
 % packages
+
+\usepackage[
+	orientation=landscape,
+	size=custom,
+	width=24,
+	height=14,
+	scale=0.6
+]{beamerposter}
 
 \usepackage{pgfpages}
 \usepackage{booktabs}
@@ -24,22 +37,48 @@
 \usepackage{hyperxmp}
 \usepackage{multirow}
 \usepackage{xparse}
+\usepackage{hyphenat}
+\usepackage{xfrac}
 \usepackage{caption}
+\usepackage{enumitem}
+\setitemize{label=	\usebeamerfont*{itemize item}
+					\usebeamercolor[fg]{itemize item}
+					\usebeamertemplate{itemize item}}
 
-\usepackage[
-	backend=biber,
-	style=alphabetic,
-	sorting=ynt
-]{biblatex}
+\usepackage{siunitx}
+\sisetup{range-phrase=--}
 
-\usepackage[printwatermark]{xwatermark}
-\usepackage{ifthen}
+\usepackage{natbib}
+\bibliographystyle{natbib}
+
+\usepackage{background}
+\backgroundsetup{
+	placement=center,
+	scale=3,
+	contents={\begin{minipage}{1.0\textwidth}\centering\wm\end{minipage}},
+	opacity=0.02,
+	color=gray,
+	angle=0
+}
+\setbeamertemplate{background}{\BgMaterial}
+
 
 % settings
 
 \graphicspath{{./graphics/}}
 
+\makeatletter
+\defbeameroption{show only notes}[]%
+{
+	\beamer@notestrue%
+	\beamer@notesnormalsfalse%
+}
+\makeatother
+
 \setbeameroption{\notesOption}
+
+\setsansfont{CMU Serif}
+\setmonofont{CMU Typewriter Text}
 
 \makeatletter
 \let\@@magyar@captionfix\relax % chktex 21
@@ -47,26 +86,33 @@
 
 \logo{
 	\includegraphics[
-		width=1cm,
+		width=2cm,
 		keepaspectratio
-	]{logo.eps}\hspace{\dimexpr\paperwidth-36pt}\vspace{-30pt}
+	]{logo}\hspace{\dimexpr\paperwidth-2cm-10pt}\vspace{-30pt}
 }
 
-\addbibresource{bibfile.bib}
+\titlegraphic{%
+	\begin{picture}(0,0)
+		\put(620,-180){\makebox(0,0)[rt]{\includegraphics[width=5cm]{logo}}}
+	\end{picture}
+}
 
 \makeatletter
 	\def\beamer@framenotesbegin{% at beginning of slide
-		\usebeamercolor[fg]{normal text} 
+		\usebeamercolor[fg]{normal text}
 			\gdef\beamer@noteitems{}%
-			\gdef\beamer@notes{}% 
+			\gdef\beamer@notes{}%
 	}
 \makeatother
 
+\definecolor{RoyalBlue}{RGB}{11,32,76}
+\definecolor{DustyBlue}{RGB}{81,150,195}
+
 \hypersetup{
 	colorlinks=true,
-	linkcolor=magenta,
-	urlcolor=cyan,
-	citecolor=blue,
+	linkcolor=RoyalBlue,
+	urlcolor=RoyalBlue,
+	citecolor=DustyBlue,
 	pdfpagemode=FullScreen,
 	pdfdisplaydoctitle=true,
 	pdfmenubar=false,
@@ -75,42 +121,27 @@
 
 \captionsetup[figure]{labelformat=empty}
 
-\definecolor{CardinalRed}{RGB}{172,29,55} 
-\definecolor{Tangerine}{RGB}{247,148,30} 
+\makeatletter
+	\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\makeatother
 
-\setbeamercolor{alerted text}{fg=CardinalRed}
-\setbeamercolor{example text}{fg=Tangerine}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{normal text}{fg=RoyalBlue}
+\setbeamercolor{alerted text}{fg=DustyBlue}
+\setbeamercolor{example text}{fg=RoyalBlue}
 {
 	\usebeamercolor[fg]{alerted text}
 	\usebeamercolor[fg]{example text}
+	\usebeamercolor[fg]{normal text}
 }
 
 % definitions
-
-\newcommand{\BigO}[1]{\mathcal{O}\left(#1\right)}
-\newcommand{\BigOmega}[1]{\Omega\left(#1\right)}
-
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-
-\newsavebox{\mybox}
-\newsavebox{\tablebox}
 
 \xpatchbibmacro{name:andothers}{%
 	\bibstring{andothers}%
 }{%
 	\bibstring[\emph]{andothers}%
 }{}{}
-
-\newsavebox\watermark%
-\savebox\watermark{\tikz[color=gray,opacity=0.02]\node{\wm};}
-\newwatermark*[
-	allpages,
-	angle=0,
-	scale=3,
-	xpos=0,
-	ypos=-25
-]{\usebox\watermark}
 
 \makeatletter
 	\newcommand{\manuallabel}[2]{\def\@currentlabel{#2}\label{#1}} % chktex 21
