@@ -16,6 +16,7 @@
 	\maketitle
 
 	\input{sections/introduction}
+	\input{sections/background}
 
 	\ifthenelse%
 		{\equal{\generatenotes}{only}}
@@ -24,7 +25,7 @@
 
 	\begin{frame}[allowframebreaks]{References}
 
-		\bibliography{bibfile}
+		\printbibliography%
 
 		\note{The references}
 

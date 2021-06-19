@@ -4,10 +4,10 @@
 - Background
   - crypto topics
   - obliviousness and ORAM
-  - $`k`$-anonymity, $`l`$-diversity, $`t`$-closeness and differential privacy
+  - privacy: $`k`$-anonymity, $`l`$-diversity, $`t`$-closeness and differential privacy
   - enclaves and SGX
 - Model
-  - data leakage (from non-semantic encryption) + attacks
+  - data leakage (from non-symmetric encryption) + attacks
 	- OPE/ORE + my work
   - access pattern leakage + attacks
   - communication volume leakage + attacks

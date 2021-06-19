@@ -1,0 +1,86 @@
+
+\setbeamercovered{transparent}
+\newlength{\listLabelLength}
+
+\section{Background}
+
+	\begin{frame}{Cryptographic primitives}
+
+		\begin{columns}[T,onlytextwidth]
+			\column{0.475\textwidth}
+
+				\onslide<1->{
+
+					\begin{block}{Symmetric Encryption Scheme \algo{E}}
+						\vspace*{1ex}
+
+						\settowidth{\listLabelLength}{\textbf{Key generation}}
+						\begin{description}[
+							font=\bfseries,
+							leftmargin=\dimexpr\listLabelLength+1em\relax,
+							labelindent=0pt,
+							labelwidth=\listLabelLength%
+							]
+							\item[Key generation] $k \sample \algo{E.KeyGen}{}$
+							\item[Encrypt] $c \sample \algo{E.Enc}{x, k}$
+							\item[Decrypt] $x \gets \algo{E.Dec}{c, k}$
+						\end{description}
+
+					\end{block}
+				}
+
+			\column{0.475\textwidth}
+
+				\onslide<2->{
+
+					\begin{block}{Order-revealing encryption scheme \algo{ORE}}
+						\vspace*{1ex}
+
+						\settowidth{\listLabelLength}{\textbf{Key generation}}
+						\begin{description}[
+							font=\bfseries,
+							leftmargin=\dimexpr\listLabelLength+1em\relax,
+							labelindent=0pt,
+							labelwidth=\listLabelLength%
+						]
+							\item[Key generation] $k \sample \algo{ORE.KeyGen}{}$
+							\item[Encrypt] $c \sample \algo{ORE.Enc}{x, k}$
+							\item[Decrypt] $x \gets \algo{ORE.Dec}{c, k}$
+							\item[Comapre] $c_1\ \texttt{op}\ c_2 \equiv x_1\ \texttt{op}\ x_2$ \\ $\texttt{op} \in \{ <, \le, =, \ge, > \}$
+						\end{description}
+
+					\end{block}
+			}
+
+		\end{columns}
+
+		\vspace*{3ex}
+
+		\begin{columns}[T,onlytextwidth]
+			\column{0.475\textwidth}
+				\onslide<1->{
+
+						For example, AES~\cite{aes-nist} in CBC mode + IV~\cite{modes-of-operation-nist}.
+				}
+
+			\column{0.475\textwidth}
+				\onslide<2->{
+
+						For example, BCLO~\cite{bclo-ope}, CLWW~\cite{clww-ore}, Lewi-Wu~\cite{lewi-wu-ore}, CLOZ~\cite{cloz-ore} and FH-OPE~\cite{fh-ope}.
+				}
+
+		\end{columns}
+
+		\note{
+			The note.
+
+		}
+
+	\end{frame}
+
+	\begin{frame}{Access pattern and ORAM}
+
+
+
+	\end{frame}
+

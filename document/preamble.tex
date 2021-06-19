@@ -24,6 +24,23 @@
 	scale=0.6
 ]{beamerposter}
 
+\usepackage[
+	lambda,
+	advantage,
+	operators,
+	sets,
+	landau,
+	probability,
+	notions,
+	logic,
+	ff,
+	mm,
+	primitives,
+	events,
+	complexity,
+	asymptotics,
+	keys
+]{cryptocode}
 \usepackage{pgfpages}
 \usepackage{booktabs}
 \usepackage{bm}
@@ -48,8 +65,12 @@
 \usepackage{siunitx}
 \sisetup{range-phrase=--}
 
-\usepackage{natbib}
-\bibliographystyle{natbib}
+\usepackage[
+	backend=bibtex,
+	style=numeric,
+	sorting=ynt
+]{biblatex}
+\addbibresource{bibfile.bib}
 
 \usepackage{background}
 \backgroundsetup{
@@ -159,3 +180,9 @@
 \def\startfixnote#1\end{\note{#1}\end} % chktex 9 chktex 14
 
 \newcommand{\epsolute}{\ensuremath{\mathcal{E}}psolute}
+\DeclareDocumentCommand{\algo}{ m g }{%
+	{%
+		\textsc{#1}%
+		\IfNoValueF{#2}{\ensuremath{\left( #2 \right)}}%
+	}%
+}
