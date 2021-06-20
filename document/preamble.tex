@@ -128,14 +128,15 @@
 	}
 \makeatother
 
-\definecolor{RoyalBlue}{RGB}{11,32,76}
-\definecolor{DustyBlue}{RGB}{81,150,195}
+\definecolor{Darker}{HTML}{2C0000}
+\definecolor{Lighter}{HTML}{CC0000}
+\definecolor{Text}{RGB}{11,32,76}
 
 \hypersetup{
 	colorlinks=true,
-	linkcolor=RoyalBlue,
-	urlcolor=RoyalBlue,
-	citecolor=DustyBlue,
+	linkcolor=Darker,
+	urlcolor=Darker,
+	citecolor=Lighter,
 	pdfpagemode=FullScreen,
 	pdfdisplaydoctitle=true,
 	pdfmenubar=false,
@@ -149,9 +150,11 @@
 \makeatother
 
 \setbeamercolor{background canvas}{bg=white}
-\setbeamercolor{normal text}{fg=RoyalBlue}
-\setbeamercolor{alerted text}{fg=DustyBlue}
-\setbeamercolor{example text}{fg=RoyalBlue}
+\setbeamercolor{normal text}{fg=Text}
+% \setbeamercolor{normal text}{fg=Darker}
+\setbeamercolor{frametitle}{bg=Darker, fg=white}
+\setbeamercolor{alerted text}{fg=Lighter}
+\setbeamercolor{example text}{fg=Darker}
 {
 	\usebeamercolor[fg]{alerted text}
 	\usebeamercolor[fg]{example text}
