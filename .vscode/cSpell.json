@@ -1,30 +1,32 @@
 {
-	"version": "0.1",
-	"language": "en",
-	"words": [
-		"Dmytro",
-		"Bogatov",
-		"chktex"
-	],
-	"flagWords": [
-		"yu",
-		"yum"
-	],
-	"dictionaries": [
-		"companies",
-		"filetypes",
-		"misc",
-		"softwareTerms",
-		"en_us",
-		"latex"
-	],
-	"ignoreRegExpList": [
-		"^\\\\\\w+{?",
-		"\\\\textcite{.*}",
-		"\\\\cite{.*}",
-		"\\\\begin{\\w+}",
-		"\\\\end{\\w+}",
-		"\\\\usepackage{\\w+}",
-		"\\\\bibliographystyle{\\w+}"
-	]
+    "version": "0.1",
+    "language": "en",
+    "words": [
+        "BCLO",
+        "Bogatov",
+        "chktex",
+        "Dmytro",
+        "ORAM"
+    ],
+    "flagWords": [
+        "yu",
+        "yum"
+    ],
+    "dictionaries": [
+        "companies",
+        "filetypes",
+        "misc",
+        "softwareTerms",
+        "en_us",
+        "latex"
+    ],
+    "ignoreRegExpList": [
+        "^\\\\\\w+{?",
+        "\\\\textcite{.*}",
+        "\\\\cite{.*}",
+        "\\\\begin{\\w+}",
+        "\\\\end{\\w+}",
+        "\\\\usepackage{\\w+}",
+        "\\\\bibliographystyle{\\w+}"
+    ]
 }

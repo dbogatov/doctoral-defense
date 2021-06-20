@@ -46,7 +46,7 @@
 							\item[Key generation] $k \sample \algo{ORE.KeyGen}{}$
 							\item[Encrypt] $c \sample \algo{ORE.Enc}{x, k}$
 							\item[Decrypt] $x \gets \algo{ORE.Dec}{c, k}$
-							\item[Comapre] $c_1\ \texttt{op}\ c_2 \equiv x_1\ \texttt{op}\ x_2$ \\ $\texttt{op} \in \{ <, \le, =, \ge, > \}$
+							\item[Compare] $c_1\ \texttt{op}\ c_2 \equiv x_1\ \texttt{op}\ x_2$ \\ $\texttt{op} \in \{ <, \le, =, \ge, > \}$
 						\end{description}
 
 					\end{block}
@@ -80,7 +80,24 @@
 
 	\begin{frame}{Access pattern and ORAM}
 
+		\textbf{Access pattern} is a sequence of memory accesses \oramProgram{}, where each access consists of the memory \emph{location} $o$, read \oramRead{} or write \oramWrite{} \emph{operation} and the \emph{data} $d$ to be written.
 
+		Oblivious RAM (ORAM) is mechanism that hides the accesses pattern.
+		More formally, \oram{} is a protocol between the client \client{} (who accesses) and the server \server{} (who stores), with a guarantee that the view of the server is indistinguishable for any two sequences of the same lengths.
+
+		\begin{center}
+			\procedure[linenumbering]{\oram{} protocol}{
+				\textbf{Client \client}											\>														\> \textbf{Server \server}	\\
+				%
+				\oramProgram{} = \left. (\oramRead, i, \bot) \right|_{i = 1}^5	\> 														\>							\\
+				%
+				\text{(client state)}											\> \sendmessageboth*[6em]{\algo{ORAM}{\oramProgram}}	\> \text{(server state)}	\\
+				%
+				\{ d_1, d_2, d_3, d_4, d_5 \}									\>														\>
+			}
+		\end{center}
+
+		For example: Square Root ORAM~\cite{oram-theory}, Hierarchical ORAM~\cite{oram-original}, Binary-Tree ORAM~\cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM~\cite{shortest-path-oram}, TP-ORAM~\cite{tp-oram}, \textbf{Path-ORAM}~\cite{path-oram} and TaORAM~\cite{taostore}.
 
 	\end{frame}
 

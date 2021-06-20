@@ -58,6 +58,7 @@
 \usepackage{xfrac}
 \usepackage{caption}
 \usepackage{enumitem}
+
 \setitemize{label=	\usebeamerfont*{itemize item}
 					\usebeamercolor[fg]{itemize item}
 					\usebeamertemplate{itemize item}}
@@ -83,6 +84,7 @@
 }
 \setbeamertemplate{background}{\BgMaterial}
 
+\usepackage{eucal}
 
 % settings
 
@@ -107,9 +109,9 @@
 
 \logo{
 	\includegraphics[
-		width=2cm,
+		width=1cm,
 		keepaspectratio
-	]{logo}\hspace{\dimexpr\paperwidth-2cm-10pt}\vspace{-30pt}
+	]{logo}\hspace{\dimexpr\paperwidth-1.5cm}\vspace{-30pt}
 }
 
 \titlegraphic{%
@@ -179,6 +181,20 @@
 \newenvironment{fixnote}{\startfixnote}{}
 \def\startfixnote#1\end{\note{#1}\end} % chktex 9 chktex 14
 
+% Add bidirectional arrow to cryptocode
+\makeatletter
+	\newcommandx*{\sendmessageboth}[2][1=<->]{%
+		\sendmessage{#1}{#2}%
+	}
+	\WithSuffix\newcommand\sendmessageboth*[2][\pcdefaultmessagelength]{%
+		\begingroup%
+			\renewcommand{\@pcsendmessagetop}{\let\halign\@pc@halign$\begin{aligned}#2\end{aligned}$}% chktex 21
+			\sendmessage{<->}{length=#1}%
+		\endgroup%
+	}
+	\renewcommand{\pccomment}[1]{{\rhd\;\text{\scriptsize#1}}} % chktex 21
+\makeatother
+
 \newcommand{\epsolute}{\ensuremath{\mathcal{E}}psolute}
 \DeclareDocumentCommand{\algo}{ m g }{%
 	{%
@@ -186,3 +202,10 @@
 		\IfNoValueF{#2}{\ensuremath{\left( #2 \right)}}%
 	}%
 }
+\newcommand{\client}{\ensuremath{\mathcal{C}}}
+\newcommand{\user}{\ensuremath{\mathcal{U}}}
+\newcommand{\server}{\ensuremath{\mathcal{S}}}
+\newcommand{\oram}{\ensuremath{\textsc{ORAM}}}
+\newcommand{\oramProgram}{\ensuremath{\mathbf{y}}}
+\newcommand{\oramRead}{\ensuremath{\mathbf{r}}}
+\newcommand{\oramWrite}{\ensuremath{\mathbf{w}}}

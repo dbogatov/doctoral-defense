@@ -7,7 +7,7 @@ shopt -s extglob
 cd "${0%/*}"
 CWD=$(pwd)
 
-INTERACTION=nonstopmode
+INTERACTION=errorstopmode
 OUTDIR=dist
 JOBNAME=presentation
 NOTES="\def\generatenotes{hide}"
