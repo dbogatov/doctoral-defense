@@ -11,7 +11,7 @@
 
 				\onslide<1->{
 
-					\begin{block}{Symmetric Encryption Scheme \algo{E}}
+					\begin{block}{Symmetric Encryption Scheme}
 						\vspace*{1ex}
 
 						\settowidth{\listLabelLength}{\textbf{Key generation}}
@@ -33,7 +33,7 @@
 
 				\onslide<2->{
 
-					\begin{block}{Order-revealing encryption scheme \algo{ORE}}
+					\begin{block}{Order-revealing encryption scheme}
 						\vspace*{1ex}
 
 						\settowidth{\listLabelLength}{\textbf{Key generation}}
@@ -80,9 +80,11 @@
 
 	\begin{frame}{Access pattern and ORAM}
 
+		\justifying%
+
 		\textbf{Access pattern} is a sequence of memory accesses \oramProgram{}, where each access consists of the memory \emph{location} $o$, read \oramRead{} or write \oramWrite{} \emph{operation} and the \emph{data} $d$ to be written.
 
-		Oblivious RAM (ORAM) is mechanism that hides the accesses pattern.
+		Oblivious RAM (ORAM) is a mechanism that hides the accesses pattern.
 		More formally, \oram{} is a protocol between the client \client{} (who accesses) and the server \server{} (who stores), with a guarantee that the view of the server is indistinguishable for any two sequences of the same lengths.
 
 		\begin{columns}[T]
@@ -112,7 +114,9 @@
 		\vspace*{1ex}
 
 		For example: Square Root ORAM~\cite{oram-theory}, Hierarchical ORAM~\cite{oram-original}, Binary-Tree ORAM~\cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM~\cite{shortest-path-oram}, TP-ORAM~\cite{tp-oram}, \textbf{Path-ORAM}~\cite{path-oram} and TaORAM~\cite{taostore}.
-		\alert{ORAM incurs at least logarithmic overhead in the number of stored records.}
+		\alert{ORAM incurs at least logarithmic overhead in the number of stored records.~\cite{oram-original}}
 
 	\end{frame}
+
+
 
