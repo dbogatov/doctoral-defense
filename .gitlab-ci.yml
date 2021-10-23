@@ -10,7 +10,7 @@ stages:
 variables:
   AUTHPASSWORD: "example" # change to "" (empty string) to disable authentication
   # username is always "review" (without quotes)
-  CI_REF: &ref 2d782be464b01739f1de49edb7f91ffbf481d592
+  CI_REF: &ref 6a3e7d8fe1d26a2787128522d584d268fa575c29
   BUILD_ARGS: " | -n | -s "
 
 include:
@@ -80,3 +80,8 @@ include:
   - project: "templates/ci-snippets"
     file: "latex/pages.yml"
     ref: *ref
+
+check-links:
+  variables:
+    # TODO enable our DOI and epsolute.org
+    BLC_EXCLUDE: -s *10.1007* -s *10.1145/3460120* -s epsolute.org --accept-codes 403
