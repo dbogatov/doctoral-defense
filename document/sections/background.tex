@@ -118,5 +118,73 @@
 
 	\end{frame}
 
+	\begin{frame}{Privacy}
+
+		\begin{block}{$k$-anonymity~\cite{k-anonymity}}
+			\justify%
+
+			Every tuple in the released table must be indistinguishably related to no fewer than $k$ respondents (i.e., similar to at lest $k - 1$ other tuples).
+
+			\begin{itemize}
+				\item only with respect to quasi-identifiers
+				\item attacks using background knowledge and lack of diversity
+				\item a property of a table, not a mechanism (other works with anonymization techniques exist) % l-diversity page 3 bottom
+			\end{itemize}
+			% https://spdp.di.unimi.it/papers/k-Anonymity.pdf1
+
+		\end{block}
+
+		\pause%
+
+		\begin{block}{$\ell$-diversity~\cite{l-diversity}}
+			\justify%
+
+			A block is $\ell$-diverse if it contains at least $\ell$ ``well-represented'' values for the sensitive attribute $S$.
+			A table is $\ell$-diverse if every block is $\ell$-diverse.
+
+			Can choose definition of ``well-represented''.
+			For example, in \emph{entropy $\ell$-diversity}, every block has at least $\ell$ distinct values for the sensitive attribute.
+			In \emph{recursive $\ell$-diversity}, most common value does not appear too often, less common --- not too infrequently.
+
+			% https://personal.utdallas.edu/~muratk/courses/privacy08f_files/ldiversity.pdf
+
+		\end{block}
+
+		% security hides all data completely at a cost, privacy protects information of an individual from inference and de-anonymization
+
+	\end{frame}
+
+	\begin{frame}{Privacy}
+
+		\begin{block}{$t$-closeness~\cite{t-closeness}}
+			\justify%
+
+			A block exhibits $t$-closeness if the distance between the distributions of a sensitive attribute in this block and in the whole table is no more than a threshold $t$.
+			A table exhibits $t$-closeness if every block does.
+			The metric used is the Earth Mover's Distance~\cite{emd}.
+
+			% https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.157.824&rep=rep1&type=pdf
+
+		\end{block}
+
+		\pause%
+
+		\begin{block}{Differential Privacy, adapted from~\cite{our-data-ourselves, differential-privacy-original}}
+			\justify%
+
+			A randomized algorithm \algo{A} is $(\epsilon, \delta)$-differentially private if for all $\database_1 \sim \database_2 \in \searchKeyDomain^\dataSize$, and for all subsets $\mathcal{O}$ of the output space of \algo{A},
+			\[
+				\probability{ \algo{A}{ \database_1 } \in \mathcal{O} } \leq \exp(\epsilon) \cdot \probability{ \algo{A}{ \database_2 } \in \mathcal{O} } + \delta \; .
+			\]
+
+			\begin{itemize}
+				\item Laplace Perturbation Algorithm (LPA)~\cite[Theorem 1]{differential-privacy-original}
+				\item Differentially Private Sanitizer
+				\item Composition Theorem (disjoint and non-disjoint sets)
+			\end{itemize}
+
+		\end{block}
+
+	\end{frame}
 
 

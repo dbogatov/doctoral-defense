@@ -5,7 +5,7 @@
   - crypto topics
   - obliviousness and ORAM
   - privacy: $`k`$-anonymity, $`l`$-diversity, $`t`$-closeness and differential privacy
-  - enclaves and SGX
+  - enclaves and SGX, ZeroTrace
 - Model
   - data leakage (from non-symmetric encryption) + attacks
 	- OPE/ORE + my work
