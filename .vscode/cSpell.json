@@ -7,7 +7,9 @@
         "Bogatov",
         "chktex",
         "Dmytro",
-        "ORAM"
+        "ORAM",
+        "syscalls",
+        "untrusted"
     ],
     "flagWords": [
         "yu",

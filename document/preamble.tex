@@ -64,8 +64,12 @@
 					\usebeamercolor[fg]{itemize item}
 					\usebeamertemplate{itemize item}}
 
-\usepackage{siunitx}
-\sisetup{range-phrase=--}
+\usepackage[binary-units]{siunitx}
+\sisetup{
+	range-phrase = --,
+	group-minimum-digits = 4,
+	per-mode = symbol
+}
 
 \usepackage[
 	backend=bibtex,

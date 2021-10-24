@@ -187,4 +187,49 @@
 
 	\end{frame}
 
+	\begin{frame}{Encalves, SGX and ZeroTrace}
+
+		\begin{block}{Software Guard Extensions (SGX)~\cite{sgx-1, sgx-2, sgx-3, sgx-manual, sgx-explained}}
+			\justify%
+
+			\vspace*{1ex}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.6\textwidth}
+
+					Features:
+					\begin{itemize}
+						\item Set of new x86 instructions
+						\item Virtual isolation within ``enclaves''
+						\item The entire non-enclave stack is untrusted
+						\item Can swap/re-encrypt pages from RAM
+						\item Application declares enclave and non-enclave parts
+						\item Enclave should manipulate sensitive data, e.g., keys
+					\end{itemize}
+
+				\column{0.4\textwidth}
+
+					Issues:
+					\begin{itemize}
+						\item Small $\approx \SI{96}{\mega\byte}$ of ``trusted'' memory
+						\item Enclave code is significantly slower
+						\item No direct I/O or syscalls
+						\item \alert{Leaks access pattern}
+					\end{itemize}
+
+			\end{columns}
+
+		\end{block}
+
+		\vspace*{1ex}
+
+		\begin{block}{ZeroTrace~\cite{zerotrace}}
+			\justify%
+
+			PathORAM~\cite{path-oram} or CircuitORAM~\cite{circuit-oram} in SGX, given that the enclave code leaks access pattern. Uses oblivious operations.
+
+		\end{block}
+
+	\end{frame}
+
 
