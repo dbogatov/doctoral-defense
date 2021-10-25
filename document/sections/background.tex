@@ -4,6 +4,32 @@
 
 \section{Background}
 
+	\begin{frame}{Motivation and overview}
+
+		\begin{itemize}
+			\item<1-> With vast amounts of data, organizations choose to use cloud solutions
+			\item<1-> These solutions need to be both efficient and secure
+			\item<2-> Recent attacks on access pattern (AP)~\cite{multidimensional-range-queries, inference-attack-islam-14, leakage-abuse-attacks-cash-15, inference-attacks-naveed-15, generic-attacks-kellaris, attacks-tao-of-inference, grubbs-attacks, access-pattern-disclosure, atacks-improved-reconstruction} and communication volume (CV)~\cite{generic-attacks-kellaris, state-of-uniform, atacks-improved-reconstruction, pump-volume-attacks, volume-range-attacks}
+			\item<3->
+				Existing solutions may be insufficient:
+				\begin{itemize}
+					\item<1,2,3,6-> \normalsize
+						protection against snapshot adversary does not account for AP and CV \\
+						\small{CryptDB~\cite{crypt-db}, Arx~\cite{arx}, Seabed~\cite{seabed} and SisoSPIR~\cite{sisospir}}
+
+					\item<1,2,4,6-> \normalsize
+						enclaves like SGX are still uncommon and limited in memory \\
+						\small{Cipherbase~\cite{cipherbase}, HardIDX~\cite{hardidx}, StealthDB~\cite{stealth-db}, EnclaveDB~\cite{enclave-db}, ObliDB~\cite{oblidb}, Opaque~\cite{opaque} and Oblix~\cite{oblix}}
+
+					\item<1,2,5,6-> \normalsize
+						other solutions protect either from one of AP or CV, or use linear scan and full padding \\
+						\small{\crypte~\cite{crypte}, Shrinkwrap~\cite{shrinkwrap}, SEAL~\cite{seal} and PINED-RQ~\cite{pined-rq}}
+				\end{itemize}
+			\item<6-> \epsolute{}: most secure and practical range- and point-query engine in the outsourced database model, that protects both AP and CV using Differential Privacy, while not relying on TEE, linear scan or full padding
+		\end{itemize}
+
+	\end{frame}
+
 	\begin{frame}{Cryptographic primitives}
 
 		\begin{columns}[T,onlytextwidth]
