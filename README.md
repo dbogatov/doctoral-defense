@@ -14,6 +14,7 @@
   - teaser: DPODB
 - Work in the Area
   - property-preserving encryption
+    - My VLDB work
     - CryptDB
     - Arx
     - PPQED

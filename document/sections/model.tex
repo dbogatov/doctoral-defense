@@ -1,0 +1,54 @@
+\section{Model}
+
+	\begin{frame}{Snapshot adversary / Data-at-rest}
+
+		\begin{columns}[T,onlytextwidth]
+			\column{0.5\textwidth}
+
+				\begin{block}{Adversary steals the hard drive}
+
+					\begin{itemize}
+						\item<1-> Cannot query fully encrypted blob \\ \small{cannot outsource key}
+						\item<1-> Download-decrypt-query is inefficient
+						\item<1-> Relaxing from absolute (semantic) security
+						\item<2-> Searchable symmetric encryption (SSE)~\cite{sse-improved}
+						\item<3-> Fully-homomorphic encryption (FHE)~\cite{fhe}
+						\item<4-> Functional Encryption~\cite{functional-encryption}
+						\item<5-> Property-preserving encryption (PPE)~\cite{ope-original, ore-original}
+					\end{itemize}
+
+				\end{block}
+
+			\column{0.5\textwidth}
+
+				\onslide<6,7>{
+
+					\begin{block}{Attacks}
+
+						\begin{itemize}
+							\item<1-5,6-> Usually require auxillary knowledge \\ \small{e.g., distribution} % chktex 8
+							\item<1-5,6-> Not necessarily ``full'' reconstruction % chktex 8
+							\item<1-5,7-> Inference Attacks on Property-Preserving Encrypted Databases~\cite{inference-attacks-naveed-15} % chktex 8
+							\item<1-5,7-> The Tao of Inference in Privacy-Protected Databases~\cite{attacks-tao-of-inference} % chktex 8
+							\item<1-5,7-> Why Your Encrypted Database Is Not Secure~\cite{grubbs-attacks} % chktex 8
+							\item<1-5,7-> Data Recovery on Encrypted Databases With k-Nearest Neighbor Query Leakage~\cite{knn-attacks} % chktex 8
+						\end{itemize}
+
+					\end{block}
+
+				}
+
+		\end{columns}
+
+	\end{frame}
+
+	% inference-attack-islam-14 are for AP
+	% leakage-abuse-attacks-cash-15
+	% state-of-uniform
+	% access-pattern-disclosure
+	% generic-attacks-kellaris
+	% attacks-improved-reconstruction
+
+	% volume:
+	% generic-attacks-kellaris
+	% pump-volume-attacks
