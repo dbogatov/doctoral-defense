@@ -42,13 +42,73 @@
 
 	\end{frame}
 
-	% inference-attack-islam-14 are for AP
-	% leakage-abuse-attacks-cash-15
-	% state-of-uniform
-	% access-pattern-disclosure
-	% generic-attacks-kellaris
-	% attacks-improved-reconstruction
+	\begin{frame}{Persistent adversary / AP and CV leakage}
 
-	% volume:
-	% generic-attacks-kellaris
-	% pump-volume-attacks
+		\begin{columns}[T,onlytextwidth]
+			\column{0.5\textwidth}
+
+			\onslide<1->{
+				\begin{block}{Access Pattern}
+
+					\begin{itemize}
+						\item Which query ``touches'' which records
+						\item Applicable to all types of queries
+						\item Usually mitigated with ORAM
+						\item Attacks~\cite{multidimensional-range-queries, inference-attack-islam-14, leakage-abuse-attacks-cash-15, inference-attacks-naveed-15, generic-attacks-kellaris, attacks-tao-of-inference, grubbs-attacks, access-pattern-disclosure, attacks-improved-reconstruction}
+					\end{itemize}
+
+				\end{block}
+			}
+
+			\column{0.5\textwidth}
+
+				\onslide<2->{
+
+					\begin{block}{Communication volume}
+
+						\begin{itemize}
+							\item The size of the answer (in bytes or records)
+							\item More often applicable to range queries
+							\item Usually mitigated with padding / noise
+							\item Attacks~\cite{generic-attacks-kellaris, state-of-uniform, attacks-improved-reconstruction, pump-volume-attacks, volume-range-attacks}
+						\end{itemize}
+
+					\end{block}
+
+				}
+
+		\end{columns}
+
+		\vspace*{2ex}
+
+		\onslide<3->{
+			Can we put forth a definition that would imply protection against all these attacks?
+		}
+
+	\end{frame}
+
+	\begin{frame}{Differentially Private Outsourced Database System}
+
+		\begin{definition}[\alert{Computationally Differentially Private Outsourced Database System (CDP-ODB)}]
+			\justify%
+
+			We say that an outsourced database system \protocol{} is $(\epsilon, \delta)$-computationally differentially private (a.k.a.~CDP-ODB) if for every polynomial time distinguishing adversary \adversary{}, for every neighboring databases $\database \sim \database^\prime$, and for every query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ where $m = \mathsf{poly}(\lambda)$,
+
+			\begin{multline*}
+				\probability{\adversary \left( 1^\lambda, \view{\protocol, \server}{\database, \fromNtoM{\query}{1}{m}} \right) = 1 } \leq \\
+				\exp{\epsilon} \cdot \probability{\adversary \left( 1^\lambda, \view{\protocol ,\server}{\database^\prime, \fromNtoM{\query}{1}{m}} \right) = 1} + \delta + \negl \; ,
+			\end{multline*}
+			the probability is over the randomness of the distinguishing adversary \adversary{} and the protocol \protocol{}.
+		\end{definition}
+
+		\pause%
+
+		Note:
+		\begin{itemize}
+			\item Entire view of the adversary is DP-protected
+			\item Implies protection against communication volume and access pattern leakages
+			\item Query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ is fixed
+			\item $\negl$ accounts for the computational (as opposed to theoretical) DP definition
+		\end{itemize}
+
+	\end{frame}
