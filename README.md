@@ -20,10 +20,11 @@
     - PPQED
     - SisoSPIR
   - access pattern and/or communication volume
-    - Foundations of Differentially Oblivious Algorithms
     - $`\text{Crypt}\epsilon`$
     - Shrinkwrap (mention SMCQL)
+    - SEAL
     - PINED-RQ
+    - Foundations of Differentially Oblivious Algorithms
   - SGX
     - Cipherbase
     - Oblix

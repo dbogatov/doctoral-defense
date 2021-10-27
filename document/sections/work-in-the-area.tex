@@ -1,0 +1,187 @@
+\section{Work in the Area}
+
+	\subsection{Property-Preserving Encryption}
+
+		\begin{frame}{Survey of OPE/ORE schemes~\cite{ore-benchmark-17}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\begin{block}{The problem}
+
+						\begin{itemize}
+							\item Many different solutions
+							\item Performance / security tradeoff
+							\item Heterogeneous security definitions and leakage profiles
+							\item \textbf{Performance of the schemes not well-understood}
+							\begin{itemize}
+								\item Some were not even implemented
+								\item Prototype implementation at best
+								\item Not benchmarked against one another
+								\item Use different primitive implementations
+							\end{itemize}
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.5\textwidth}
+
+					\onslide<2->{
+						\begin{block}{Our solution}
+
+							\begin{itemize}
+								\item Analyzed security and leakages of the constructions under a common framework
+								\item Analyzed theoretically performance of the constructions
+								\item \textbf{Implemented and run experiments}
+								\begin{itemize}
+									\item Implemented 5 OPE / ORE schemes and 5 range query protocols
+									\item Used same language, framework and primitive implementations
+									\item Benchmarked primitives execution times
+									\item Counted primitives and I/O usage
+								\end{itemize}
+							\end{itemize}
+
+						\end{block}
+					}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{Survey of OPE/ORE schemes~\cite{ore-benchmark-17}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.4\textwidth}
+
+					\begin{block}{OPE/ORE schemes + leakage}
+
+						\begin{itemize}
+							\item \normalsize BCLO~\cite{crypt-db-ope} \\ \small{$\approx$ top half of the bits}
+							\item \normalsize CLWW~\cite{practical-ore} \\ \small{most-significant differing bit}
+							\item \normalsize Lewi-Wu~\cite{lewi-ore} \\ \small{most-significant differing block}
+							\item \normalsize CLOZ~\cite{adam-ore-v2} \\ \small{equality pattern of most-significant differing bit}
+							\item \normalsize FH-OPE~\cite{fh-ope} \\ \small{insertion order}
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.6\textwidth}
+
+					\begin{block}{Range query protocols + leakage (on top of result size)}
+
+						\begin{itemize}
+							\item \normalsize {\BPlus} tree with ORE \\ \small{same as ORE}
+							\item \normalsize Kerschbaum~\cite{florian-protocol} \\ \small{total order}
+							\item \normalsize POPE~\cite{pope} \\ \small{partial order}
+							\item \normalsize Logarithmic-BRC~\cite{practical-range-search} \\ \small{same as SSE}
+							\item \normalsize ORAM with {\BPlus} tree \\ \small{fully hiding}
+						\end{itemize}
+
+					\end{block}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{CryptDB~\cite{crypt-db}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.6\textwidth}
+
+					\begin{block}{CryptDB design and contributions}
+
+						\begin{itemize}
+							\item Regular SQL API for applications
+							\item Proxy between app and server rewrites queries
+							\item Encryption depending on operations
+							\begin{small}
+								\begin{itemize}
+									\item \algo{DET} for equality
+									\item \algo{OPE} for comparison
+									\item \algo{HE} for aggregates
+									\item \algo{RND} if not used
+								\end{itemize}
+							\end{small}
+							\item Records encrypted in onion layers
+							\item Column key derives from user password
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.4\textwidth}
+
+					\begin{block}{Issues}
+
+						\begin{itemize}
+							\item Once onion level is removed, security degradation is permanent
+							\item Leakage
+							\begin{itemize}
+								\item Order and histogram
+								\item Access pattern
+								\item Communication volume
+							\end{itemize}
+						\end{itemize}
+
+					\end{block}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{Arx~\cite{arx}}
+
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\begin{block}{Arx~\cite{arx}}
+
+						\begin{itemize}
+							\item A proxy between app and MongoDB
+							\item Uses only semantically secure encryption
+							\item Innovative range index with garbled circuits \\
+							\begin{small} has to ``rebuild'' circuits \end{small}
+							\item Equality index inspired by SSE
+							\item Almost no leakage for snapshot adversary
+							\item Requires schema and queries in advance
+							\item \textbf{Leaks AP and CV}
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.5\textwidth}
+
+					\onslide<2->{
+
+						\begin{block}{PPQED~\cite{ppqed}}
+
+							\begin{itemize}
+								\item Securely evaluate DNF of predicates
+								\item Two non-colluding servers, one has keys
+								\item Uses garbled circuits or HE
+								\item Slow, leaks CV and (apparently) AP
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+					\onslide<3->{
+
+						\begin{block}{SisoSPIR~\cite{sisospir}}
+
+							\begin{itemize}
+								\item Three parties, at most one corrupted
+								\item {\BPlus} tree stored in ORAM layer-by-layer
+								\item Neither party sees the exact search path
+								\item Claim protection against CV and AP
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+
+		\end{frame}
