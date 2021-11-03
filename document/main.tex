@@ -21,10 +21,14 @@
 
 	\maketitle
 
+	\backupbegin%
+
 	\ifthenelse%
 		{\equal{\generatenotes}{only}}
 		{\nocite{*}}
 		{}
+
+
 
 	\begin{frame}[allowframebreaks]{References}
 
@@ -33,5 +37,7 @@
 		\note{The references}
 
 	\end{frame}
+
+	\backupend%
 
 \end{document}

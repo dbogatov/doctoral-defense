@@ -289,3 +289,12 @@
 \newcommand{\semitransp}[2][35]{\color{fg!#1}#2}
 
 \newcommand{\BPlus}{B\raisebox{.35\height}{\scalebox{.8}{+}}}
+
+\newcommand{\backupbegin}{
+	\newcounter{framenumberappendix}
+	\setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+	\addtocounter{framenumberappendix}{-\value{framenumber}}
+	\addtocounter{framenumber}{\value{framenumberappendix}}
+}

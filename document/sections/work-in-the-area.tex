@@ -1,3 +1,5 @@
+% cSpell:ignore ORAMs
+
 \section{Work in the Area}
 
 	\subsection{Property-Preserving Encryption}
@@ -70,10 +72,10 @@
 					\begin{block}{Range query protocols + leakage (on top of result size)}
 
 						\begin{itemize}
-							\item \normalsize {\BPlus} tree with ORE \\ \small{same as ORE}
+							\item \normalsize {\BPlus} tree with ORE \\ \small{same as underlying ORE}
 							\item \normalsize Kerschbaum~\cite{florian-protocol} \\ \small{total order}
 							\item \normalsize POPE~\cite{pope} \\ \small{partial order}
-							\item \normalsize Logarithmic-BRC~\cite{practical-range-search} \\ \small{same as SSE}
+							\item \normalsize Logarithmic-BRC~\cite{practical-range-search} \\ \small{same as underlying SSE}
 							\item \normalsize ORAM with {\BPlus} tree \\ \small{fully hiding}
 						\end{itemize}
 
@@ -191,12 +193,12 @@
 			\begin{columns}[T,onlytextwidth]
 				\column{0.5\textwidth}
 
-					\begin{block}{\crypte{} design and contributions}
+					\begin{block}{\crypte~\cite{crypte} design and contributions}
 
 						\begin{itemize}
 							\item Executes entire ``DP programs'' \\
 								\begin{small}
-									transformations then measurement
+									transformations followed by the measurement
 								\end{small}
 							\item Non-colluding \emph{analyst} and \emph{crypto server}
 							\item Crypto server
@@ -243,4 +245,111 @@
 			\end{columns}
 
 		\end{frame}
+
+		\begin{frame}{Shrinkwrap~\cite{shrinkwrap}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\begin{block}{Shrinkwrap~\cite{shrinkwrap} design and contributions}
+
+						\begin{itemize}
+							\item \emph{Federated} SQL queries ($m$ owners)
+							\item Pad and obliviously sort in circuit model \\
+							\begin{small}
+								\textbf{hides both AP and CV}
+							\end{small}
+							\item ``Shrink'' to DP-sized chunk
+							\item Optimal privacy budget allocation
+							\item Much faster than fully oblivious
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.5\textwidth}
+
+					\begin{block}{Issues}
+
+						\begin{itemize}
+							\item $\bigO{n \log n}$ for $n$ fully padded
+							\item Pad and obliviously sort in circuit model \\
+								\begin{small}
+									na\"\i{}ve and performance is subpar
+								\end{small}
+							\item Cannot run for $m > 2$ \\
+								\begin{small}
+									union-join across $m$ owners is infeasible
+								\end{small}
+							\item Takes hours per query on a local network
+						\end{itemize}
+
+					\end{block}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{SEAL~\cite{seal}, PINED-RQ~\cite{pined-rq} and Foundations of Differentially Oblivious Algorithms~\cite{differential-obliviousness}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\begin{block}{SEAL~\cite{seal}}
+
+						\begin{itemize}
+							\item \textbf{SE} \textbf{A}djustable \textbf{L}eakage to the bit-level % cspell:disable-line
+							\item SE is based on Logarithmic-SRC-i~\cite{practical-range-search}
+							\item Adjustable ORAM hides $\alpha$ bits of AP \\
+								\begin{small}
+									partition data into $\frac{n}{2^\alpha}$ ORAMs
+								\end{small}
+							\item Adjustable padding hides $x$ bits of CV \\
+								\begin{small}
+									pad to the closest power of $x$
+								\end{small}
+							\item New query protocols use SEAL as black-box
+							\item Faster than scan, very slow in practice \\
+								\begin{small}
+									even though no I/Os, only RAM
+								\end{small}
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.5\textwidth}
+
+					\onslide<2->{
+
+						\begin{block}{PINED-RQ~\cite{pined-rq}}
+
+							\begin{itemize}
+								\item \BPlus{} tree with already noisy records
+								\item \alert{May end up dropping real records}
+								\item Updates are limited and expensive
+								\item Experimental evaluation is misleading
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+					\onslide<3->{
+
+						\begin{block}{Foundations of Differentially Oblivious Algorithms~\cite{differential-obliviousness}}
+
+							\begin{itemize}
+								\item New definition, algorithms and bounds
+								\item AP itself is a DP-protected statistics
+								\item Weaker than full obliviousness
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+		\end{frame}
+
+	\subsection{Trusted Execution Environment / Enclaves / SGX}
 
