@@ -353,3 +353,216 @@
 
 	\subsection{Trusted Execution Environment / Enclaves / SGX}
 
+		\begin{frame}{Opaque~\cite{opaque} and ObliDB~\cite{oblidb}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\begin{block}{Opaque~\cite{opaque}}
+
+						\begin{itemize}
+							\item Distributed analytics on top of Spark \\
+							\begin{small}
+								supports filter, join, aggregation
+							\end{small}
+							\item \alert{Requires truly oblivious memory} \\
+								\begin{small}
+									does not exist
+								\end{small}
+							\item \emph{Encryption} mode: security and integrity \\
+								\begin{small}
+									most of it ``for free'' with SGX
+								\end{small}
+							\item \emph{Oblivious} mode: hiding AP \\
+								\begin{small}
+									sort with bitonic, linear scan
+								\end{small}
+							\item \emph{Padding} mode: not filter out dummies \\
+								\begin{small}
+									impractical
+								\end{small}
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.5\textwidth}
+
+					\onslide<2->{
+
+						\begin{block}{ObliDB~\cite{oblidb}}
+
+							\begin{itemize}
+								\item \alert{Requires truly oblivious memory}
+								\item Choice of \emph{flat} and \emph{indexed} storage
+								\item \texttt{SELECT}
+									\begin{itemize}
+										\item \emph{na\"\i{}ve}: ORAM over two tables
+										\item \emph{small}: load to oblivious buffer
+										\item \emph{large}: duplicates table, scans obliviously
+										\item \emph{continuous}: assumes table is sorted
+										\item \emph{hash}: put row into $\algo{H}{i}$ position
+									\end{itemize}
+								\item \texttt{AGGREGATE}: running value in enclave
+								\item \texttt{JOIN}
+									\begin{itemize}
+										\item \emph{hash join}: put hashes in enclave
+										\item \emph{sort-merge join}: sort chunk in SGX, merge chunks with bitonic, filter with linear scan
+									\end{itemize}
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{Cipherbase~\cite{cipherbase}, StealthDB~\cite{stealth-db}, EnclaveDB~\cite{enclave-db} and Hermetic~\cite{hermetic}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\onslide<1->{
+
+						\begin{block}{Cipherbase~\cite{cipherbase}}
+
+							\begin{itemize}
+								\item Pre-SGX era, FPGA ``trusted machine''
+								\item Primitive operators executed in TEE
+								\item No experiments or analysis
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+				\column{0.5\textwidth}
+
+					\onslide<2->{
+
+						\begin{block}{StealthDB~\cite{stealth-db}}
+
+							\begin{itemize}
+								\item SGX extension over PostgreSQL
+								\item Bring components to SGX on-demand
+								\item Implementation is great: loadable module
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+			\vspace*{2ex}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.5\textwidth}
+
+					\onslide<3->{
+
+						\begin{block}{EnclaveDB~\cite{enclave-db}}
+
+							\begin{itemize}
+								\item Mostly integrity and freshness guarantees
+								\item No AP or CV protection, side-channels out of scope
+								\item \alert{Assumes \SI{192}{\giga\byte} of truly oblivious memory}
+								\item Ideas:
+									\begin{itemize}
+										\item put entire mini-OS in enclave
+										\item compile queries to binaries
+									\end{itemize}
+								\item No SGX in experiments, poor simulation
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+				\column{0.5\textwidth}
+
+					\onslide<4->{
+
+						\begin{block}{Hermetic~\cite{hermetic}}
+
+							\begin{itemize}
+								\item Set of primitives against side-channels
+								\item Oblivious execution environment
+									\begin{itemize}
+										\item always runs to completion
+										\item uses only cache lines
+										\item data-oblivious
+										\item no side-effects
+									\end{itemize}
+								\item \alert{Assumes only software attacks}
+								\item Not published yet
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+		\end{frame}
+
+		\begin{frame}{Oblix~\cite{seal}, HybrIDX~\cite{hybr-idx} and HardIDX~\cite{hardidx}}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.49\textwidth}
+
+					\begin{block}{Oblix~\cite{seal}}
+
+						\begin{itemize}
+							\item ``Doubly-oblivious'' data structures
+							\item Doubly-oblivious sorted multimap \\
+								\begin{small}
+									$r$ top values to hide CV
+								\end{small}
+							\item Doubly-oblivious PathORAM \\
+								\begin{small}
+									somewhat better than ZeroTrace~\cite{zerotrace}
+								\end{small}
+							\item Way to make ``tree-like'' structure oblivious
+							\item Experiments only ``estimate'' performance of doubly-oblivious ORAM
+						\end{itemize}
+
+					\end{block}
+
+				\column{0.02\textwidth}
+
+				\column{0.49\textwidth}
+
+					\onslide<2->{
+
+						\begin{block}{HybrIDX~\cite{hybr-idx}}
+
+							\begin{itemize}
+								\item Range query index \alert{obfuscates} CV and AP
+								\item \alert{Does not consider AP leakage inside SGX}
+								\item CV is obfuscated with bucketization
+								\item AP is obfuscated using cache
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+					\onslide<3->{
+
+						\begin{block}{HardIDX~\cite{hardidx}}
+
+							\begin{itemize}
+								\item \BPlus{} tree put directly in enclave
+								\item \alert{AP and CV are not even considered}
+							\end{itemize}
+
+						\end{block}
+
+					}
+
+			\end{columns}
+
+		\end{frame}
+
