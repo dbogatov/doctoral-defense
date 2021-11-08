@@ -69,7 +69,7 @@
 
 				\column{0.6\textwidth}
 
-					\begin{block}{Range query protocols + leakage (on top of result size)}
+					\begin{block}{Range query protocols + leakage (on top of AP and CV)}
 
 						\begin{itemize}
 							\item \normalsize {\BPlus} tree with ORE \\ \small{same as underlying ORE}
@@ -98,10 +98,10 @@
 							\item Encryption depending on operations
 							\begin{small}
 								\begin{itemize}
-									\item \algo{DET} for equality
 									\item \algo{OPE} for comparison
+									\item \algo{DET} for equality
 									\item \algo{HE} for aggregates
-									\item \algo{RND} if not used
+									\item \algo{RND} if value is never used
 								\end{itemize}
 							\end{small}
 							\item Records encrypted in onion layers
