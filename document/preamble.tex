@@ -59,6 +59,7 @@
 \usepackage{xfrac}
 \usepackage{caption}
 \usepackage{enumitem}
+\usepackage{bibentry}
 
 \setitemize{label=	\usebeamerfont*{itemize item}
 					\usebeamercolor[fg]{itemize item}
@@ -71,12 +72,8 @@
 	per-mode = symbol
 }
 
-\usepackage[
-	backend=bibtex,
-	style=numeric,
-	sorting=ynt
-]{biblatex}
-\addbibresource{bibfile.bib}
+\usepackage{natbib}
+\bibliographystyle{plain}
 
 \usepackage{background}
 \backgroundsetup{

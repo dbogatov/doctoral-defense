@@ -1,0 +1,58 @@
+
+\setbeamercovered{transparent}
+
+\section{Introduction and Background}
+
+	\begin{frame}{Motivation and overview}
+
+		\begin{itemize}
+			\item<1-> With vast amounts of data, organizations choose to use cloud solutions
+			\item<1-> \alert{Challenge:} solutions must be both secure and efficient
+			\item<2-> Query types:
+				\begin{itemize}
+					\item<1,2,6-> Point queries: \emph{return all residents of ZIP code 02215}
+					\item<1,3,6-> Range queries: \emph{return all patients ages 18 to 65}
+					\item<1,4,6-> kNN queries (for arbitrary dimensions): \emph{return 5 nearest restaurants to my work location}
+					\item<1,5,6-> \texttt{JOIN} / \texttt{GROUP BY} queries: \emph{return students name and grade joined by ID}
+				\end{itemize}
+			\item<6-> Security models:
+				\begin{itemize}
+					\item<1-5,6> Snapshot adversary: steal hard drive % chktex 8
+					\item<1-5,7> Persistent adversary: continuously monitor entire server % chktex 8
+				\end{itemize}
+		\end{itemize}
+
+	\end{frame}
+
+	\begin{frame}{My work}
+
+		\begin{itemize}
+			\item<1> \bibentry{ore-benchmark-17}
+
+				\begin{itemize}
+					\item \small Model: \alert{snapshot}, query type: \alert{range} \normalsize
+				\end{itemize}
+
+			\item<2> \bibentry{epsolute}
+
+				\begin{itemize}
+					\item \small Model: \alert{persistent}, query type: \alert{point} and \alert{range} \normalsize
+				\end{itemize}
+
+			\item<3> Work-in-progress: Private kNN queries
+
+			\begin{itemize}
+				\item \small Model: \alert{snapshot}, query type: \alert{kNN} \normalsize
+			\end{itemize}
+
+			\item<4> Work-in-progress: Oblivious \texttt{JOIN} queries
+
+			\begin{itemize}
+				\item \small Model: \alert{persistent}, query type: \alert{\texttt{JOIN}} \normalsize
+			\end{itemize}
+
+			\item<5> \bibentry{bogatov-idemix-2020}
+
+		\end{itemize}
+
+	\end{frame}
