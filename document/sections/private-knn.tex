@@ -16,11 +16,11 @@
 				Applications range from similarity search to geographical search \\
 				\begin{small}
 					Document is a vector of words/features/topics, query is to find $k$ most similar documents \\
-					Object on a map is a 2D vector, query is to find $k$ nearest restaurants
+					Object on a map is a 2D vector, query is to find $k$ nearest locations
 				\end{small}
 
 			\item<4->
-				\emph{Approximate distance-comparison preserving encryption (DCPE) scheme} to input and queries
+				\emph{Approximate distance-comparison preserving encryption (DCPE) scheme} on input and queries
 				\[
 					\forall x, y, x \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
 				\]
@@ -41,7 +41,7 @@
 			\item<1->
 				The scheme is by Riddhi Ghosal and Adam O'Neil
 			\item<2->
-				\textbf{Key generation}: sample at random: length multiplier $s$ and seeds for samplers $K$
+				\textbf{Key generation}: sample at random length multiplier $s$ and seeds for samplers $K$
 			\item<3->
 				\textbf{Encrypt}: take input vector $x \in \RR^d$
 				\begin{itemize}
@@ -52,7 +52,7 @@
 			\item<4->
 				\textbf{Decrypt}: take encrypted vector $c \in \RR^d$ and nonce $n$
 				\begin{itemize}
-					\item Do same steps except shrink times $s$ and remove ball component
+					\item Do same steps except \emph{shrink} times $s$ and \emph{remove} ball component
 				\end{itemize}
 		\end{itemize}
 
@@ -74,7 +74,7 @@
 				% cspell:disable-next-lin
 				Original document set is a \textbf{T}ext \textbf{RE}trieval \textbf{C}onference (TREC) test collection \\
 				\begin{small}
-					set of documents, a set of topics (questions), and a corresponding set of relevance judgments (right answers)
+					set of documents, set of topics (questions), and corresponding set of relevance judgments (right answers)
 				\end{small}
 
 			\item<4->
