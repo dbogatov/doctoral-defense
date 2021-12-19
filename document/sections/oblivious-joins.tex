@@ -1,0 +1,71 @@
+\section{Work-in-progress: \\ oblivious \texttt{JOIN}s}
+
+	\begin{frame}{General idea}
+
+		\begin{itemize}
+			\item<1->
+				Model: \alert{persistent}, query type: \alert{inner \texttt{JOIN}}
+
+			\item<2->
+				Input: two tables $T_1$ and $T_2$, query: return a cross product of $T_1$ and $T_2$ where $T_1.k = T_2.k$ \\
+				\begin{small}
+					We may also consider \texttt{SELECT JOIN}: \texttt{WHERE $T_1$.k = $T_2$.k AND $T_1$.a = 10}
+				\end{small}
+
+			\item<3->
+				\alert{Challenge}: produce \texttt{JOIN} result hiding both access pattern and result size
+
+			\item<4->
+				\alert{Proposed solution}:
+				\begin{itemize}
+					\item use enclave (SGX) and oblivious primitives (sort, compaction)
+					\item construct index over join keys, add DP noise to it
+					\item partition the data by keys to fit a partition in the enclave
+					\item consolidate sparse keys as an optimization
+					\item do inner join within partition
+				\end{itemize}
+
+		\end{itemize}
+
+	\end{frame}
+
+	\begin{frame}{Detailed algorithm}
+
+		\begin{itemize}
+			\item<1->
+				Construct list $L$ of the form $(k, n_1, \hat{n_1}, n_2, \hat{n_2})$, with an element per distinct key plus noise \\
+				\begin{small}
+					$k$ is a join key, $n$ and $\hat{n}$ are real and $\widehat{\text{noisy}}$ numbers of records with that key in corresponding input table \\
+					Noise sampled to a hierarchical sanitizer from a Laplacian distribution
+				\end{small}
+
+			\item<2->
+				Client \user{} sends sorted $L$ and hierarchical sanitizer over noise counts to the server \server{} \\
+				\begin{small}
+					Similar to \epsolute{}, adversary does not learn much from noisy counts
+				\end{small}
+
+			\item<3->
+				Server $\server{}$ partitions $L$ by $k$, so that partition size ($\hat{n_1} + \hat{n_2}$) is bounded and uniform \\
+				\begin{small}
+					Resulting mapping from keys to partitions $\mathcal{M}(k) = i$ can be proven DP
+				\end{small}
+
+			\item<4->
+				Consolidate sparse keys: ensure that each \emph{bin} corresponds to at least $U$ real keys \\
+				\begin{small}
+					\emph{Bin} is collection of tuples for which we will do cross product join
+				\end{small}
+
+			\item<5->
+				Obliviously move and pad each bin/partition with dummy records \\
+				\begin{small}
+					Within each bin the data is sorted by input tables
+				\end{small}
+
+			\item<6->
+				For each bin, \textbf{do cartesian product}
+
+		\end{itemize}
+
+	\end{frame}
