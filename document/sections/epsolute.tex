@@ -1,6 +1,38 @@
 \section{\epsolute{}: Efficiently Querying Databases While Providing Differential Privacy~\cite{epsolute}}
 
-	\begin{frame}{Background: Differential Privacy and Sanitization}
+	\begin{frame}[label={frame:epsolute-motivation}]
+
+		\frametitle{Motivation}
+
+		\begin{block}{The problem}
+
+			\begin{itemize}
+				\item<1-> Previous solutions work in the snapshot model (adversary steals the hard drive)
+				\item<1->
+					What about persistent adversary (malicious script with \texttt{root} permissions)? \\
+					\begin{small}
+						Model: \alert{persistent}, query type: \alert{point} and \alert{range}
+					\end{small}
+				\item<1-> Need to protect \alert{access pattern} and \alert{communication volume}
+				\item<2->
+					ORAM to hide access pattern \\
+					\begin{small}
+						Expensive, each request costs $\bigO{n}$ \hyperlink{frame:appendix:oram}{\beamerskipbutton{ORAM definition}}
+					\end{small}
+				\item<3->
+					Adding fake records (noise) to the answer to hide result size \\
+					\begin{small}
+						How much noise to add to have guarantee and least overhead? \\
+						Adding constant or uniformly sampled noise is not an option \\
+						Differential Privacy!
+					\end{small}
+			\end{itemize}
+
+		\end{block}
+
+	\end{frame}
+
+	\begin{frame}{Differential Privacy, LPA and Sanitization}
 
 		\begin{definition}[\alert{Differential Privacy}, adapted from~\cite{our-data-ourselves, differential-privacy-original}]
 			\justify%
@@ -13,69 +45,41 @@
 
 		\pause%
 
-		\begin{theorem}[\alert{Laplace Perturbation Algorithm (LPA)}, adapted Theorem 1 from~\cite{differential-privacy-original}]
-			\justify%
+		\begin{columns}[T,onlytextwidth]
+			\column{0.6\textwidth}
 
-			An algorithm \algo{A} that adds independently generated noise from a \textbf{zero-mean Laplace distribution} with scale $\lambda = \frac{\textsf{sensitivity of query}}{\epsilon}$ to each coordinate of a query result, satisfies $\epsilon$-differential privacy.
-		\end{theorem}
+				\begin{block}{How to make sense of it?}
+					\begin{itemize}
+						\item<2->
+							Differential Privacy is a property of an algorithm \\
+							\begin{small}
+								What about $\epsilon$ and $\delta$?
+							\end{small}
+						\item<3->
+							How to construct such an algorithm? \\
+							\begin{small}
+								Laplace Perturbation Method!
+							\end{small}
+						\item<4->
+							What if negative value is sampled? \\
+							\begin{small}
+								Cannot truncate one side, must shift entire distribution
+							\end{small}
+					\end{itemize}
+				\end{block}
 
-		\pause%
+			\column{0.4\textwidth}
 
-		\begin{definition}[\alert{Differentially Private Sanitizer}, informal]
-			\justify%
-
-			An $(\epsilon, \delta, \alpha, \beta)$-differentially private sanitizer is a pair of algorithms $(\algo{A}, \algo{B})$ such that:
-			\begin{itemize}
-				\item $A$ is $(\epsilon, \delta)$-differentially private, and
-				\item on input a dataset, \algo{A} outputs a data structure \serverDS{} such that with probability $1 - \beta$ for all queries, $\algo{B}{ \serverDS, \query }$ is within $\alpha$ of a real query result.
-			\end{itemize}
-		\end{definition}
-
-	\end{frame}
-
-	\begin{frame}{Background: Access pattern and ORAM}
-
-		\justifying%
-
-		\textbf{Access pattern} is a sequence of memory accesses \oramProgram{}, where each access consists of the memory \emph{location} $o$, read \oramRead{} or write \oramWrite{} \emph{operation} and the \emph{data} $d$ to be written.
-
-		Oblivious RAM (ORAM) is a mechanism that hides the accesses pattern.
-		More formally, \oram{} is a protocol between the client \client{} (who accesses) and the server \server{} (who stores), with a guarantee that the view of the server is indistinguishable for any two sequences of the same lengths.
-
-		\begin{columns}[T]
-			\column{0.475\textwidth}
-
-				\[
-					\begin{split}
-						\abs{\oramProgram_1}					& = \abs{\oramProgram_2}							\\
-						\textsc{View}_\server (\oramProgram_1)	& \cindist \textsc{View}_\server (\oramProgram_2)
-					\end{split}
-				\]
-
-			\column{0.475\textwidth}
-
-				\procedure[linenumbering]{\oram{} protocol}{
-					\textbf{Client \client}											\>														\> \textbf{Server \server}	\\
-					%
-					\oramProgram{} = \left. (\oramRead, i, \bot) \right|_{i = 1}^5	\> 														\>							\\
-					%
-					\text{(client state)}											\> \sendmessageboth*[6em]{\algo{ORAM}{\oramProgram}}	\> \text{(server state)}	\\
-					%
-					\{ d_1, d_2, d_3, d_4, d_5 \}									\>														\>
+				\onslide<5->{
+					\centering
+					\includegraphics[width=0.5\linewidth]{logo}
 				}
 
 		\end{columns}
 
-		\vspace*{1ex}
-
-		For example: Square Root ORAM~\cite{oram-theory}, Hierarchical ORAM~\cite{oram-original}, Binary-Tree ORAM~\cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM~\cite{shortest-path-oram}, TP-ORAM~\cite{tp-oram}, \textbf{Path-ORAM}~\cite{path-oram} and TaORAM~\cite{taostore}.
-		\alert{ORAM incurs at least logarithmic overhead in the number of stored records.~\cite{oram-original}}
-
 	\end{frame}
 
 	\begin{frame}{Differentially Private Outsourced Database System}
-
-		Model: \alert{persistent}, query type: \alert{point} and \alert{range}
 
 		\begin{definition}[\alert{Computationally Differentially Private Outsourced Database System (CDP-ODB)}]
 			\justify%
@@ -94,35 +98,36 @@
 		Note:
 		\begin{itemize}
 			\item Entire view of the adversary is DP-protected
-			\item Implies protection against communication volume and access pattern leakages
-			\item Query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ is fixed
-			\item $\negl$ accounts for the computational (as opposed to theoretical) DP definition
+			\item Implies protection against \textbf{communication volume} and \textbf{access pattern} leakages
+			\item Query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ is fixed (more on that next)
+			\item $\negl$ needed for the computational (as opposed to information-theoretical) DP definition
 		\end{itemize}
 
 	\end{frame}
 
 	\begin{frame}{On impossibility of adaptive queries}
 
-		\begin{block}{Example}
+		\begin{block}{Why is the query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ fixed?}
 			\justify%
 
 			\begin{itemize}
-				\item Suppose neighboring medical databases differ in one record with a rare diagnosis ``Alzheimer's disease''
-				\item A medical professional queries the database
-				\begin{itemize}
-					\item
-						for that diagnosis first (point query) \\
-						\texttt{SELECT name FROM patients WHERE condition = 'ALZ'} % chktex 32
+				\item<1-> Suppose neighboring medical databases differ in one record with a rare diagnosis ``Alzheimer's disease''
+				\item<2-> A medical professional, who is \textbf{a user, not an adversary} queries the database
+					\begin{itemize}
+						\item
+							for that diagnosis first (point query) \\
+							\texttt{SELECT name FROM patients WHERE condition = 'ALZ'} % chktex 32
 
-					\item
-						if there is a record, she queries the senior patients next (range query) \\
-						\texttt{SELECT name FROM patients WHERE age >= 65}
+						\item
+							if there is a record, she queries the senior patients next (range query) \\
+							\texttt{SELECT name FROM patients WHERE age >= 65}
 
-					\item
-						otherwise she queries the general population,resulting in more records \\
-						\texttt{SELECT name FROM patients}
-				\end{itemize}
-				\item Efficient system cannot return nearly the same number of records in both cases, thus, the adversary can distinguish
+						\item
+							otherwise she queries the general population,resulting in more records \\
+							\texttt{SELECT name FROM patients}
+					\end{itemize}
+				\item<3-> \alert{Adversary can know the answer to the first query by observing result size of the second}
+				\item<3-> Efficient system cannot return nearly the same number of records in both cases, thus, the adversary can distinguish
 			\end{itemize}
 
 		\end{block}
@@ -131,8 +136,13 @@
 
 	\begin{frame}{Single-Threaded \epsolute{}}
 
-		\centering
-		\includegraphics[width=\textwidth]{dp-oram}
+		\begin{block}{Single-Threaded \epsolute{} protocol}
+
+			\vspace*{2ex}
+			\centering
+			\includegraphics[width=\textwidth]{dp-oram}
+
+		\end{block}
 
 	\end{frame}
 
@@ -140,9 +150,15 @@
 
 		\onslide<1->{
 			\begin{itemize}
-				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines
+				\item
+					Single-threaded version is prohibitively slow, must parallelize \\
+					\begin{small}
+						Assume single-threaded solution generates $r = \num{1500}$ real and $f = \num{500}$ noisy records
+					\end{small}
+
+				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines (assume $\oramsNumber = 4$)
 				\item Partition records randomly (by ID) into \oramsNumber{} partitions, generate \oramsNumber{} inverted indexes
-				\item Choose a strategy on shared vs split \serverDS{}
+				\item What to do about \serverDS{}?
 			\end{itemize}
 		}
 
@@ -154,8 +170,9 @@
 
 						\begin{itemize}[leftmargin=*]
 							\item Composition of disjoint datasets: take max $\epsilon$
-							\item Each ORAM replies with $(1 + \gamma) \frac{k_0}{\oramsNumber{}}$ records, where $k_0$ is a required number of records
-							\item To bound probability to $\beta$, use $\gamma = \sqrt{ \frac{-3 \oramsNumber \log \beta}{ k_0 } }$
+							\item Each ORAM incurs noise comparable to $f$
+							\item Win by splitting ORAM work $r$ into \oramsNumber{} partitions and lose by multiplying $f$ times \oramsNumber{}
+							\item That is, each ORAM is processing $\frac{r}{\oramsNumber} + f = \num{875}$ records in parallel
 						\end{itemize}
 
 					\end{block}
@@ -169,14 +186,10 @@
 					\begin{block}{$\gamma$-method: shared \serverDS{}}
 
 						\begin{itemize}[leftmargin=*]
-							\item Same number of records per ORAM
-							\item
-								Use $\gamma$ as in no-$\gamma$ method, except
-								\begin{itemize}
-									\item $k_0 \gets k_0 + \frac{\log \domainSize}{\epsilon}$ for point queries
-									\item $k_0 \gets k_0 + \frac{\log^{1.5} \domainSize}{\epsilon}$ for range queries
-								\end{itemize}
-
+							\item Same number of total records per ORAM
+							\item Generated noise is larger than $f$ (say, $2f$)
+							\item But it is split among \oramsNumber{} ORAMs
+							\item That is, each ORAM is processing $\frac{r + 2f}{\oramsNumber} = \num{625}$ records in parallel
 						\end{itemize}
 
 					\end{block}
@@ -214,7 +227,7 @@
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=\columnwidth]{scalability}
-			\caption{Scalability measurements for \protocolGamma{} and \protocolNoGamma{}}%
+			\caption{Scalability measurements for \protocolGamma{} (shared \serverDS{}) and \protocolNoGamma{} (\serverDS{} per ORAM)}%
 		\end{figure}
 
 	\end{frame}
