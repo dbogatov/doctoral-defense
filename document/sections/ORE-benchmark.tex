@@ -9,16 +9,17 @@
 
 				\begin{block}{The problem}
 
-					\begin{itemize}
+					\begin{itemize}[leftmargin=*]
 						\item Model: \alert{snapshot}, query type: \alert{range}
 						\item Performance / security tradeoff
 						\item Heterogeneous security definitions and leakage profiles
-						\item \textbf{Performance of the schemes not well-understood}
-						\begin{itemize}
-							\item Some were not even implemented
+						\item \textbf{Performance not well-understood}
+						\begin{itemize}[leftmargin=*]
+							\item Some schemes are not even implemented
 							\item Prototype implementation at best
 							\item Not benchmarked against one another
 							\item Use different primitive implementations
+							\item Each claims to be practical and secure
 						\end{itemize}
 					\end{itemize}
 
@@ -29,15 +30,15 @@
 				\onslide<2->{
 					\begin{block}{Our solution}
 
-						\begin{itemize}
-							\item Analyzed security and leakages of the constructions under a common framework
+						\begin{itemize}[leftmargin=*]
+							\item Analyzed security and leakages of the constructions under \textbf{a common framework}
 							\item Analyzed theoretically performance of the constructions
 							\item \textbf{Implemented and ran experiments}
-							\begin{itemize}
+							\begin{itemize}[leftmargin=*]
 								\item Implemented 5 OPE / ORE schemes and 5 range query protocols
 								\item Used same language, framework and primitive implementations
 								\item Benchmarked primitives execution times
-								\item Counted primitives and I/O usage
+								\item Counted \textbf{innovations of primitives} and \textbf{\IO{} requests}
 								\item[]
 									\hyperlink{frame:appendix:ore}{\beamerskipbutton{ORE table}}
 									\hyperlink{frame:appendix:protocols}{\beamerskipbutton{Protocols table}}

@@ -9,21 +9,21 @@
 			\begin{itemize}
 				\item<1-> Previous solutions work in the snapshot model (adversary steals the hard drive)
 				\item<1->
-					What about persistent adversary (malicious script with \texttt{root} permissions)? \\
+					What about \textbf{persistent} adversary (malicious script with \texttt{root} permissions)? \\
 					\begin{small}
 						Model: \alert{persistent}, query type: \alert{point} and \alert{range}
 					\end{small}
 				\item<1-> Need to protect \alert{access pattern} and \alert{communication volume}
 				\item<2->
-					ORAM to hide access pattern \\
+					Using ORAM to hide the access pattern \\
 					\begin{small}
 						Expensive, each request costs $\bigO{n}$ \hyperlink{frame:appendix:oram}{\beamerskipbutton{ORAM definition}}
 					\end{small}
 				\item<3->
-					Adding fake records (noise) to the answer to hide result size \\
+					Adding fake records (noise) to the answer to hide the result size \\
 					\begin{small}
-						How much noise to add to have guarantee and least overhead? \\
-						Adding constant or uniformly sampled noise is not an option \\
+						How much noise to add to have a guarantee and the least overhead? \\
+						Adding a constant or a uniformly sampled noise is not an option \\
 						Differential Privacy!
 					\end{small}
 			\end{itemize}
@@ -70,10 +70,8 @@
 
 			\column{0.4\textwidth}
 
-				\onslide<5->{
-					\centering
-					\includegraphics[width=0.5\linewidth]{logo}
-				}
+				\centering
+				\includegraphics<5->[width=1.0\linewidth]{sanitizer}
 
 		\end{columns}
 
@@ -115,15 +113,15 @@
 				\item<2-> A medical professional, who is \textbf{a user, not an adversary} queries the database
 					\begin{itemize}
 						\item
-							for that diagnosis first (point query) \\
+							for that diagnosis first \\
 							\texttt{SELECT name FROM patients WHERE condition = 'ALZ'} % chktex 32
 
 						\item
-							if there is a record, she queries the senior patients next (range query) \\
+							if there is a record, she queries the senior patients next \\
 							\texttt{SELECT name FROM patients WHERE age >= 65}
 
 						\item
-							otherwise she queries the general population,resulting in more records \\
+							otherwise she queries the general population, resulting in many more records \\
 							\texttt{SELECT name FROM patients}
 					\end{itemize}
 				\item<3-> \alert{Adversary can know the answer to the first query by observing result size of the second}
@@ -146,7 +144,7 @@
 
 	\end{frame}
 
-	\begin{frame}{Parallel \epsolute{}: the choice of separate vs shared \serverDS{}}
+	\begin{frame}{Parallel \epsolute{}}
 
 		\onslide<1->{
 			\begin{itemize}
@@ -171,7 +169,7 @@
 						\begin{itemize}[leftmargin=*]
 							\item Composition of disjoint datasets: take max $\epsilon$
 							\item Each ORAM incurs noise comparable to $f$
-							\item Win by splitting ORAM work $r$ into \oramsNumber{} partitions and lose by multiplying $f$ times \oramsNumber{}
+							\item Win by splitting ORAM work $r$ into \oramsNumber{} partitions and lose by multiplying noise $f$ times \oramsNumber{}
 							\item That is, each ORAM is processing $\frac{r}{\oramsNumber} + f = \num{875}$ records in parallel
 						\end{itemize}
 

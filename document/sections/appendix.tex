@@ -141,8 +141,11 @@
 		\vspace*{1ex}
 
 		For example: Square Root ORAM~\cite{oram-theory}, Hierarchical ORAM~\cite{oram-original}, Binary-Tree ORAM~\cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM~\cite{shortest-path-oram}, TP-ORAM~\cite{tp-oram}, \textbf{Path-ORAM}~\cite{path-oram} and TaORAM~\cite{taostore}.
-		\alert{ORAM incurs at least logarithmic overhead in the number of stored records.~\cite{oram-original}}
-		\hyperlink{frame:epsolute-motivation}{\beamerreturnbutton{Back to \epsolute{}}}
+		\alert{ORAM incurs at least logarithmic communication overhead in the number of stored records.~\cite{oram-original}}
+
+		\begin{flushright}
+			\hyperlink{frame:epsolute-motivation}{\beamerreturnbutton{Back to \epsolute{}}}
+		\end{flushright}
 
 	\end{frame}
 
@@ -156,9 +159,9 @@
 
 		\begin{itemize}
 			\item<1->
-				The scheme is by Riddhi Ghosal and Adam O'Neil
+				The scheme is by Riddhi Ghosal and Adam O'Neil \cite{dcpe}
 			\item<2->
-				\textbf{Key generation}: sample at random length multiplier $s$ and seeds for samplers $K$
+				\textbf{Key generation}: sample at random length multiplier $s$ and seeds for samplers
 			\item<3->
 				\textbf{Encrypt}: take input vector $x \in \RR^d$
 				\begin{itemize}
@@ -189,7 +192,7 @@
 				\end{small}
 
 			\item<2->
-				Query is a 768-dimensional vector asking for $k = 1000$ closest (inner product) documents
+				Query is a 768-dimensional vector asking for $k = \num{1000}$ closest (inner product) documents
 
 			\item<3->
 				% cspell:disable-next-lin
@@ -261,7 +264,7 @@
 			\item<4->
 				Consolidate sparse keys: ensure that each \emph{bin} corresponds to at least $U$ real keys \\
 				\begin{small}
-					\emph{Bin} is collection of tuples for which we will do cross product join
+					\emph{Bin} is collection of tuples for which we will do cross-product join
 				\end{small}
 
 			\item<5->

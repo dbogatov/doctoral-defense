@@ -4,7 +4,7 @@
 
 		\begin{itemize}
 			\item<1-> With vast amounts of data, organizations choose to use cloud
-			\item<1-> \alert{Challenge:} solutions must be both secure and efficient
+			\item<1-> \alert{Challenge:} solutions must be both \textbf{secure} and \textbf{efficient}
 			\item<2-> Query types: \texttt{SELECT * FROM t1 }
 				\begin{itemize}
 					\item<1,2,6-> Point queries: \texttt{WHERE zip = '02215'}
@@ -14,8 +14,8 @@
 				\end{itemize}
 			\item<6-> Security models for an outsourced database system
 				\begin{itemize}
-					\item<1-5,7> Snapshot adversary: steal the hard drive and RAM snapshot % chktex 8
-					\item<1-5,8> Persistent adversary: continuously monitor the entire server % chktex 8
+					\item<1-5,6> \textbf{Snapshot} adversary: steal the hard drive and RAM snapshot % chktex 8
+					\item<1-5,7> \textbf{Persistent} adversary: continuously monitor the entire server % chktex 8
 				\end{itemize}
 		\end{itemize}
 
@@ -25,7 +25,11 @@
 
 		\begin{block}{Proposed thesis structure}
 
+			\vspace*{-1ex}
+
 			\begin{itemize}[label={}]
+				\setlength\itemsep{-0ex}
+
 				\item<1> \bibentry{ore-benchmark-17}
 
 					\begin{itemize}[label={}]
@@ -38,19 +42,35 @@
 						\item \small Model: \alert{persistent}, query type: \alert{point} and \alert{range} \normalsize
 					\end{itemize}
 
-				\item<3> Work-in-progress: Private \knn{} queries
-
-				\begin{itemize}[label={}]
-					\item \small Model: \alert{snapshot}, query type: \alert{\knn{}} \normalsize
-				\end{itemize}
-
-				\item<4> Work-in-progress: Oblivious \texttt{JOIN} queries
-
-				\begin{itemize}[label={}]
-					\item \small Model: \alert{persistent}, query type: \alert{\texttt{JOIN}} \normalsize
-				\end{itemize}
-
 			\end{itemize}
+
+			\begin{columns}[T,onlytextwidth]
+				\column{0.44\textwidth}
+
+					\vspace*{-0.5ex}
+
+					\begin{itemize}[label={}]
+						\item<3> In-progress: Private \knn{} queries
+
+						\begin{itemize}[label={}]
+							\item \small Model: \alert{snapshot}, query type: \alert{\knn{}} \normalsize
+						\end{itemize}
+
+						\item<4> In-progress: Oblivious \texttt{JOIN} queries
+
+						\begin{itemize}[label={}]
+							\item \small Model: \alert{persistent}, query type: \alert{\texttt{JOIN}} \normalsize
+						\end{itemize}
+
+					\end{itemize}
+
+				\column{0.56\textwidth}
+
+					\visible<5->{
+						\bibentry{bogatov-idemix-2020}
+					}
+
+			\end{columns}
 
 		\end{block}
 
