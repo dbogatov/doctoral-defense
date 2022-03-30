@@ -71,7 +71,9 @@
 			\column{0.4\textwidth}
 
 				\centering
-				\includegraphics<5->[width=1.0\linewidth]{sanitizer}
+				\visible<5->{
+					\includegraphics[width=1.0\linewidth]{sanitizer}
+				}
 
 		\end{columns}
 
@@ -79,7 +81,7 @@
 
 	\begin{frame}{Differentially Private Outsourced Database System}
 
-		\begin{definition}[\alert{Computationally Differentially Private Outsourced Database System (CDP-ODB)}]
+		\begin{definition}[\alert{Computationally Differentially Private Outsourced Database System}]
 			\justify%
 
 			We say that an outsourced database system \protocol{} is $(\epsilon, \delta)$-computationally differentially private (a.k.a.~CDP-ODB) if for every polynomial time distinguishing adversary \adversary{}, for every neighboring databases $\database \sim \database^\prime$, and for every query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ where $m = \mathsf{poly}(\lambda)$,
@@ -110,7 +112,7 @@
 
 			\begin{itemize}
 				\item<1-> Suppose neighboring medical databases differ in one record with a rare diagnosis ``Alzheimer's disease''
-				\item<2-> A medical professional, who is \textbf{a user, not an adversary} queries the database
+				\item<2-> A medical professional, who is \textbf{a user (and not an adversary)} queries the database
 					\begin{itemize}
 						\item
 							for that diagnosis first \\
@@ -151,26 +153,26 @@
 				\item
 					Single-threaded version is prohibitively slow, must parallelize \\
 					\begin{small}
-						Assume single-threaded solution generates $r = \num{1500}$ real and $f = \num{500}$ noisy records
+						Assume single-threaded solution generates $r$ real and $f$ fake records
 					\end{small}
 
-				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines (assume $\oramsNumber = 4$)
+				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines
 				\item Partition records randomly (by ID) into \oramsNumber{} partitions, generate \oramsNumber{} inverted indexes
 				\item What to do about \serverDS{}?
 			\end{itemize}
 		}
 
-		\begin{columns}[T]
+		\begin{columns}[t]
 			\begin{column}{0.5\textwidth}
 
 				\onslide<2->{
-					\begin{block}{No-$\gamma$ method: \serverDS{} per ORAM}
+					\begin{block}{\protocolSeparate{}: separate \serverDS{} per ORAM}
 
 						\begin{itemize}[leftmargin=*]
 							\item Composition of disjoint datasets: take max $\epsilon$
 							\item Each ORAM incurs noise comparable to $f$
 							\item Win by splitting ORAM work $r$ into \oramsNumber{} partitions and lose by multiplying noise $f$ times \oramsNumber{}
-							\item That is, each ORAM is processing $\frac{r}{\oramsNumber} + f = \num{875}$ records in parallel
+							\item That is, all ORAMs are processing $r + \oramsNumber f$ records in parallel
 						\end{itemize}
 
 					\end{block}
@@ -181,13 +183,13 @@
 			\begin{column}{0.5\textwidth}
 
 				\onslide<3->{
-					\begin{block}{$\gamma$-method: shared \serverDS{}}
+					\begin{block}{\protocolShared{}: shared \serverDS{} for all ORAMs}
 
 						\begin{itemize}[leftmargin=*]
 							\item Same number of total records per ORAM
-							\item Generated noise is larger than $f$ (say, $2f$)
+							\item Generated noise is larger than $f$ (say, $\alpha f$)
 							\item But it is split among \oramsNumber{} ORAMs
-							\item That is, each ORAM is processing $\frac{r + 2f}{\oramsNumber} = \num{625}$ records in parallel
+							\item That is, all ORAMs are processing $r + \alpha f$ records in parallel
 						\end{itemize}
 
 					\end{block}
@@ -195,14 +197,21 @@
 
 			\end{column}
 
+
 		\end{columns}
+
+		\onslide<4->{
+			\begin{center}
+				\textbf{\protocolShared{} wins if $\alpha > \oramsNumber$}, which it is for almost all values of \oramsNumber{} ($\oramsNumber \gtrapprox 4$)
+			\end{center}
+		}
 
 	\end{frame}
 
 	\begin{frame}{Parallel \epsolute{} diagram (with improvements)}
 
 		\centering
-		\includegraphics[scale=0.44]{three-layers}
+		\includegraphics[width=0.63\textwidth]{three-layers}
 
 	\end{frame}
 
@@ -210,10 +219,10 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\textwidth]{mechanism}
+			\includegraphics[width=0.8\textwidth]{mechanism}
 			\caption{
 				\centering
-				Different range-query mechanisms (log scale).
+				Different range-query mechanisms (log scale). \hspace{\textwidth} % hack
 				Default setting: $10^6$ \SI{4}{\kibi\byte} uniformly-sampled records with the range $10^4$.
 			}%
 		\end{figure}
@@ -224,8 +233,8 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=\columnwidth]{scalability}
-			\caption{Scalability measurements for \protocolGamma{} (shared \serverDS{}) and \protocolNoGamma{} (\serverDS{} per ORAM)}%
+			\includegraphics[width=0.9\columnwidth]{scalability}
+			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{}}%
 		\end{figure}
 
 	\end{frame}

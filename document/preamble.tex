@@ -130,9 +130,15 @@
 	}
 \makeatother
 
-\definecolor{Darker}{HTML}{2A4563}
-\definecolor{Lighter}{HTML}{F1B52A}
-\definecolor{Text}{HTML}{263344}
+\iffalse%
+	\definecolor{Darker}{HTML}{2A4563}
+	\definecolor{Lighter}{HTML}{F1B52A}
+	\definecolor{Text}{HTML}{263344}
+\else%
+	\definecolor{Darker}{HTML}{2C0000}
+	\definecolor{Lighter}{HTML}{CC0000}
+	\definecolor{Text}{HTML}{303030}
+\fi%
 
 \hypersetup{
 	colorlinks=true,
@@ -225,8 +231,8 @@
 \newcommand{\protocol}{\ensuremath{\Pi}}
 \newcommand{\protocolSetup}{\ensuremath{\protocol_{\mathsf{setup}}}}
 \newcommand{\protocolQuery}{\ensuremath{\protocol_{\mathsf{query}}}}
-\newcommand{\protocolNoGamma}{\ensuremath{\protocol_{\mathsf{no-}\gamma}}}
-\newcommand{\protocolGamma}{\ensuremath{\protocol_\gamma}}
+\newcommand{\protocolSeparate}{\ensuremath{\protocol_\mathsf{separate}}}
+\newcommand{\protocolShared}{\ensuremath{\protocol_\mathsf{shared}}}
 
 \newcommand{\searchKey}{\textsf{SK}}
 \newcommand{\searchKeyDomain}{\ensuremath{\mathcal{X}}}

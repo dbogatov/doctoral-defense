@@ -23,10 +23,10 @@ fi
 
 echo ">>> Testing special characters..."
 
-for character in " ̈" "„" "“" "–"
+for character in " ̈" "„" "“" "–" "’"
 do
 	echo ">>>> Checking $character "
-	! grep -n $character document/**/*.tex document/*.tex
+	! grep -n $character document/**/*.tex document/*.tex document/*.bib
 
 	if [[ $? != 0 ]];
 	then
@@ -37,7 +37,12 @@ done
 
 echo ">>> Testing CSPELL..."
 
-docker run -it -v "$(pwd)":/code --entrypoint /bin/bash dbogatov/docker-images:cspell-latest -c "cd /code && cspell -c .vscode/cSpell.json document/**/*.tex document/*.tex"
+if cspell -V; then
+	cspell -c .vscode/cSpell.json document/**/*.tex document/*.tex
+else
+	echo "Will use Docker. Or install with: npm install -g cspell"
+	docker run -it -v "$(pwd)":/code --entrypoint /bin/bash dbogatov/docker-images:cspell-latest-multi-arch -c "cd /code && cspell -c .vscode/cSpell.json document/**/*.tex document/*.tex"
+fi
 
 if [[ $? != 0 ]];
 then

@@ -7,15 +7,14 @@
 			\item<1-> \alert{Challenge:} solutions must be both \textbf{secure} and \textbf{efficient}
 			\item<2-> Query types: \texttt{SELECT * FROM t1 }
 				\begin{itemize}
-					\item<1,2,6-> Point queries: \texttt{WHERE zip = '02215'}
-					\item<1,3,6-> Range queries: \texttt{WHERE age BETWEEN 18 AND 65}
-					\item<1,4,6-> \knn{} queries: \texttt{ORDER BY location <-> '(29.9691,-95.6972)' LIMIT 5} % chktex 36
-					\item<1,5,6-> \texttt{JOIN} / \texttt{GROUP BY} queries: \texttt{INNER JOIN t2 ON (t1.k = t2.k) GROUP BY zip}
+					\item<1,2,5-> Point queries: \texttt{WHERE zip = '02215'}
+					\item<1,3,5-> Range queries: \texttt{WHERE age BETWEEN 18 AND 65}
+					\item<1,4,5-> \knn{} queries: \texttt{ORDER BY location <-> '(29.9691,-95.6972)' LIMIT 5} % chktex 36
 				\end{itemize}
-			\item<6-> Security models for an outsourced database system
+			\item<5-> Security models for an outsourced database system
 				\begin{itemize}
-					\item<1-5,6> \textbf{Snapshot} adversary: steal the hard drive and RAM snapshot % chktex 8
-					\item<1-5,7> \textbf{Persistent} adversary: continuously monitor the entire server % chktex 8
+					\item<1-4,5> \textbf{Snapshot} adversary: steal the hard drive and RAM snapshot % chktex 8
+					\item<1-4,6> \textbf{Persistent} adversary: continuously monitor the entire server % chktex 8
 				\end{itemize}
 		\end{itemize}
 
@@ -23,12 +22,14 @@
 
 	\begin{frame}{My work}
 
-		\begin{block}{Proposed thesis structure}
+		\begin{block}{Works published during the Ph.D. program}
 
 			\vspace*{-1ex}
 
 			\begin{itemize}[label={}]
-				\setlength\itemsep{-0ex}
+				\only<4->{
+					\setlength\itemsep{-1ex}
+				}
 
 				\item<1> \bibentry{ore-benchmark-17}
 
@@ -42,35 +43,17 @@
 						\item \small Model: \alert{persistent}, query type: \alert{point} and \alert{range} \normalsize
 					\end{itemize}
 
-			\end{itemize}
-
-			\begin{columns}[T,onlytextwidth]
-				\column{0.44\textwidth}
-
-					\vspace*{-0.5ex}
+				\item<3> In-progress: Private \knn{} queries
 
 					\begin{itemize}[label={}]
-						\item<3> In-progress: Private \knn{} queries
-
-						\begin{itemize}[label={}]
-							\item \small Model: \alert{snapshot}, query type: \alert{\knn{}} \normalsize
-						\end{itemize}
-
-						\item<4> In-progress: Oblivious \texttt{JOIN} queries
-
-						\begin{itemize}[label={}]
-							\item \small Model: \alert{persistent}, query type: \alert{\texttt{JOIN}} \normalsize
-						\end{itemize}
-
+						\item \small Model: \alert{snapshot}, query type: \alert{\knn{}} \normalsize
 					\end{itemize}
 
-				\column{0.56\textwidth}
+				\item \visible<4->{
+					\bibentry{bogatov-idemix-2020}
+				}
 
-					\visible<5->{
-						\bibentry{bogatov-idemix-2020}
-					}
-
-			\end{columns}
+			\end{itemize}
 
 		\end{block}
 
