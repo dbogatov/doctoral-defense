@@ -9,23 +9,24 @@
 				Model: \alert{snapshot}, query type: \alert{\knn{}} in arbitrary dimensions
 
 			\item<2->
-				Input: vector of real numbers, query: return $k$ ``closest'' inputs to given vector \\
+				Nearest-neighbor search needs definitions of \emph{object} and \emph{distance} \\
 				\begin{small}
+					Object could be 2D/3D location, or a document embedding (high-dimensional vector) \\
 					Distance can be $\text{L}_\text{p}$ (usually, Euclidean, $p = 2$) or inner (dot) product
 				\end{small}
 
 			\item<3->
 				Applications range from similarity search to geographical search \\
 				\begin{small}
-					Document is a vector of words/features/topics, query is to find $k$ most similar documents \\
-					Object on a map is a 2D vector, query is to find $k$ nearest locations
+					Object on a map is a 2D vector, query is to find $k$ nearest locations \\
+					Document is a vector of words/features/topics, query is to find $k$ most similar documents
 				\end{small}
 
 			\item<4->
-				\emph{Approximate distance-comparison preserving encryption (DCPE) scheme} on input and queries
-				\[
-					\forall x, y, z \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
-				\]
+				Our approach is to apply \emph{property-preserving encryption} \\
+				\begin{small}
+					Query protocol is then similar to OPE/ORE
+				\end{small}
 
 			\item<5->
 				Prove theoretically and observe empirically how accuracy of search and efficiency of attacks drop with higher security \\
