@@ -94,3 +94,66 @@
 		\end{figure}
 
 	\end{frame}
+
+	\begin{frame}{Black-box inversion attack \cite{embedding-attacks}}
+
+		\begin{itemize}
+			\item<1->
+				ML model trains on document-embedding pairs and predicts a \emph{set of words} from embedding \\
+				\begin{small}
+					\indent{} Model is an LSTM trained for 30 epochs \\
+					\indent{} Original attack used BookCorpus \cite{bookcorpus} dataset, but we wil use TREC
+				\end{small}
+
+			\item<2->
+				We evaluate the attack on encrypted embeddings
+				\begin{itemize}
+					\item We also add plaintext and random embeddings for the baselines
+					\item \textbf{Public model}: adversary can use \emph{the embedding model}, therefore, trains on plaintexts
+					\item \textbf{Private model}: adversary can only use \emph{the entire system}, therefore, trains on ciphertexts
+					\item In both cases the model predicts the words from the \emph{encrypted} embedding
+				\end{itemize}
+
+			\item<3->
+				We measure precision, recall and \FOne{} score along with \emph{the percent of stop-words} \\
+				\begin{small}
+					\indent{} Stop-words are common words like ``a'', ``the'', articles, even punctuation and digits
+				\end{small}
+
+		\end{itemize}
+
+	\end{frame}
+
+	\begin{frame}{Attack performance results: public model}
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.8\textwidth]{knn-public}
+		\end{figure}
+
+	\end{frame}
+
+	\begin{frame}{Attack performance results: private model}
+
+		\begin{table}[!ht]
+			\begin{tabular*}{\linewidth}{ !{\extracolsep\fill} l c c >{\bfseries}c c } % chktex 26
+				\toprule
+					Dataset							& Precision		& Recall	& \FOne{} score & \% of non-stop-words	\\
+				\midrule
+					Encrypted with $\beta = 0.0$	& 38.84			& 27.64		& 32.30			& 2.31					\\
+					Encrypted with $\beta = 4.0$	& 36.28			& 26.61		& 30.70			& 3.21					\\
+					Random embeddings				& 36.07			& 26.61		& 30.62			& 0.00					\\
+				\bottomrule
+			\end{tabular*}
+		\end{table}
+
+	\end{frame}
+
+	\begin{frame}{Attack performance results: public model}
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.8\textwidth]{knn-tradeoff}
+		\end{figure}
+
+	\end{frame}
