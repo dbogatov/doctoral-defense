@@ -36,7 +36,9 @@
 
 	\end{frame}
 
-	\begin{frame}{Distance Comparison Preserving Encryption}
+	\begin{frame}[label={frame:dcpe}]
+
+		\frametitle{Distance Comparison Preserving Encryption}
 
 		\[
 			\forall x, y, x \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
@@ -45,7 +47,10 @@
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=0.5\columnwidth]{dcpe}
-			\caption{Distance Comparison Preserving Encryption scheme \cite{dcpe}}%
+			\caption{
+				Distance Comparison Preserving Encryption scheme \cite{dcpe} \\
+				\hyperlink{frame:appendix:dcpe}{\beamerskipbutton{DCPE algorithms}}
+			}%
 		\end{figure}
 
 	\end{frame}
@@ -58,27 +63,27 @@
 				\begin{itemize}
 					\item Generate encryption key
 					\item Encrypt dataset and queries set with $\beta$
-					\item Run queries using conventional nearest-neighbor search (e.g., FAISS \cite{faiss})
+					\item Run queries using conventional nearest-neighbor search (e.g., FAISS)
 					\item Report search accuracy metrics
 				\end{itemize}
 
 			\item<2->
-				TREC 2020 dataset is 8.8M documents embedded with fine-tuned BERT \cite{bert} (768 dimensions) \\
+				TREC 2020 dataset is 8.8M documents embedded with fine-tuned BERT (768 dimensions) \\
 				\begin{small}
-					Thanks Hamed Zamani for the dataset
+					\indent{} Thanks Hamed Zamani for the dataset
 				\end{small}
 
 			\item<3->
 				Query is a 768-dimensional embedding asking for $k = \num{1000}$ closest documents \\
 				\begin{small}
-					TREC has set of documents, set of topics (questions), and relevance judgments (right answers)
+					\indent{} TREC has set of documents, set of topics (questions), and relevance judgments (right answers)
 				\end{small}
 
 			\item<4->
 				We report result set distance and difference, and ranking quality Recall, MRR and nDCG \\
 				\begin{small}
-					Set distance and difference measure pure \knn{} accuracy \\
-					Recall, MRR and nDCG report ranking quality using relevance, common in informal retrieval literature
+					\indent{} Set distance and difference measure pure \knn{} accuracy \\
+					\indent{} Recall, MRR and nDCG report ranking quality using relevance, common in informal retrieval literature
 				\end{small}
 
 		\end{itemize}

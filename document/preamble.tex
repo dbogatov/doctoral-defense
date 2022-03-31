@@ -41,6 +41,9 @@
 	asymptotics,
 	keys
 ]{cryptocode}
+\usepackage[ruled]{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
 \usepackage{pgfpages}
 \usepackage{booktabs}
 \usepackage{bm}
@@ -75,8 +78,27 @@
 	per-mode = symbol
 }
 
-\usepackage{natbib}
-\bibliographystyle{plain}
+\usepackage[
+	backend=biber,
+	style=alphabetic,
+	giveninits=false,
+	sorting=ydnt,
+	maxbibnames=1000,
+	maxalphanames=4
+]{biblatex}
+\bibliography{bibfile}
+
+\renewcommand*{\mkbibnamegiven}[1]{%
+	\ifitemannotation{highlight}
+	{\textbf{#1}}
+	{#1}
+}
+
+\renewcommand*{\mkbibnamefamily}[1]{%
+	\ifitemannotation{highlight}
+	{\textbf{#1}}
+	{#1}
+}
 
 \usepackage{background}
 \backgroundsetup{
@@ -308,3 +330,6 @@
 }
 
 \newcommand{\FOne}{\ensuremath{\text{F}_1}}
+
+% https://tex.stackexchange.com/a/267089/97712
+\newcommand{\printpublication}[1]{\AtNextCite{\defcounter{maxnames}{99}}\fullcite{#1}}

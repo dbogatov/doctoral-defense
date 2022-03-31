@@ -1,4 +1,4 @@
-\section{Introduction and Background}
+\section{Introduction}
 
 	\begin{frame}{Motivation and overview}
 
@@ -20,40 +20,26 @@
 
 	\end{frame}
 
+	\newlength{\citationLength}
+	\settowidth{\citationLength}{\cite{bogatov-idemix-2020}}
+
 	\begin{frame}{My work}
 
 		\begin{block}{Works published during the Ph.D. program}
 
-			\vspace*{-1ex}
+			\vspace*{1ex}
 
-			\begin{itemize}[label={}]
-				\only<4->{
-					\setlength\itemsep{-1ex}
-				}
-
-				\item<1> \bibentry{ore-benchmark-17}
-
-					\begin{itemize}[label={}]
-						\item \small Model: \alert{snapshot}, query type: \alert{range} \normalsize
-					\end{itemize}
-
-				\item<2> \bibentry{epsolute}
-
-					\begin{itemize}[label={}]
-						\item \small Model: \alert{persistent}, query type: \alert{point} and \alert{range} \normalsize
-					\end{itemize}
-
-				\item<3> In-progress: Private \knn{} queries
-
-					\begin{itemize}[label={}]
-						\item \small Model: \alert{snapshot}, query type: \alert{\knn{}} \normalsize
-					\end{itemize}
-
-				\item \visible<4->{
-					\bibentry{bogatov-idemix-2020}
-				}
-
-			\end{itemize}
+			\begin{description}[
+				leftmargin=\dimexpr\citationLength+0.5em\relax,
+				labelindent=0pt,
+				labelwidth=\citationLength%
+			]
+				\setlength\itemsep{1ex}
+				\item<1>[\cite{ore-benchmark-17}] \printpublication{ore-benchmark-17}
+				\item<2>[\cite{epsolute}] \printpublication{epsolute}
+				\item<3>[TBA] In-progress: Private \knn{} queries
+				\item<4>[\cite{bogatov-idemix-2020}] \printpublication{bogatov-idemix-2020}
+			\end{description}
 
 		\end{block}
 

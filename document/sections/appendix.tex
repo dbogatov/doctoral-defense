@@ -14,27 +14,27 @@
 
 				\toprule
 
-				BCLO~\cite{crypt-db-ope}					& \onslide<1->{$\bm{n}$ \textbf{HG}}										& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{$\approx$ Top half of the bits}}								\\
+				BCLO \cite{crypt-db-ope}					& \onslide<1->{$\bm{n}$ \textbf{HG}}										& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{$\approx$ Top half of the bits}}								\\
 
 				\midrule
 
-				CLWW~\cite{practical-ore}					& \onslide<1->{$n$ PRF} 													& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{Most-significant differing bit}}								\\
+				CLWW \cite{practical-ore}					& \onslide<1->{$n$ PRF} 													& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{Most-significant differing bit}}								\\
 
 				\midrule
 
-				\multirow{3}{*}{Lewi-Wu~\cite{lewi-ore}}	& \onslide<1->{\boldmath{} $\nicefrac{2n}{d}$ \unboldmath{} \textbf{PRP}}	& \onslide<1->{\multirow{3}{*}{$\frac{n}{2d}$ Hash}}		& \onslide<1->{\multirow{3}{*}{$\frac{n}{d} \left(\lambda + n + 2^{d + 1} \right) + \lambda$}}	& \onslide<1->{\multirow{3}{*}{Most-significant differing block}}					\\
+				\multirow{3}{*}{Lewi-Wu \cite{lewi-ore}}	& \onslide<1->{\boldmath{} $\nicefrac{2n}{d}$ \unboldmath{} \textbf{PRP}}	& \onslide<1->{\multirow{3}{*}{$\frac{n}{2d}$ Hash}}		& \onslide<1->{\multirow{3}{*}{$\frac{n}{d} \left(\lambda + n + 2^{d + 1} \right) + \lambda$}}	& \onslide<1->{\multirow{3}{*}{Most-significant differing block}}					\\
 															& \onslide<1->{$2 \frac{n}{d} \left( 2^d + 1 \right)$ PRF}					&															&																								&																					\\
 															& \onslide<1->{$\frac{n}{d} 2^d$ Hash}										&															&																								&																					\\
 
 				\midrule
 
-				\multirow{3}{*}{CLOZ~\cite{adam-ore-v2}}	& \onslide<1->{$n$ PRF}														& \onslide<1->{\multirow{3}{*}{$\bm{n^2}$ \textbf{PPH}}}	& \onslide<1->{\multirow{3}{*}{$n \cdot h$}}													& \onslide<1->{\multirow{3}{*}{Equality pattern of most-significant differing bit}}	\\
+				\multirow{3}{*}{CLOZ \cite{adam-ore-v2}}	& \onslide<1->{$n$ PRF}														& \onslide<1->{\multirow{3}{*}{$\bm{n^2}$ \textbf{PPH}}}	& \onslide<1->{\multirow{3}{*}{$n \cdot h$}}													& \onslide<1->{\multirow{3}{*}{Equality pattern of most-significant differing bit}}	\\
 															& \onslide<1->{$n$ PPH}														&															&																								&																					\\
 															& \onslide<1->{1 PRP}														&															&																								&																					\\
 
 				\midrule
 
-				FH-OPE~\cite{fh-ope}						& \onslide<1->{1 Traversal}													& \onslide<1->{3 Traversals}								& \onslide<1->{$\bm{3 \cdot n \cdot N}$}														& \onslide<1->{Insertion order}														\\
+				FH-OPE \cite{fh-ope}						& \onslide<1->{1 Traversal}													& \onslide<1->{3 Traversals}								& \onslide<1->{$\bm{3 \cdot n \cdot N}$}														& \onslide<1->{Insertion order}														\\
 
 				\bottomrule
 
@@ -62,17 +62,17 @@
 				{\BPlus} tree with ORE							& \onslide<1->{$\log_B \frac{N}{B}$}							& \onslide<1->{$\log_B \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Same as ORE}}		& \onslide<1->{$1$}												& \onslide<1->{$1$}												&	\\
 				\midrule
 
-				Kerschbaum~\cite{florian-protocol}				& \onslide<1->{$\bm{\frac{N}{B}}$}								& \onslide<1->{$\log_2 \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Total order}}		& \onslide<1->{$\log_2 N$}										& \onslide<1->{$\log_2 N$}										&	\\
+				Kerschbaum \cite{florian-protocol}				& \onslide<1->{$\bm{\frac{N}{B}}$}								& \onslide<1->{$\log_2 \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Total order}}		& \onslide<1->{$\log_2 N$}										& \onslide<1->{$\log_2 N$}										&	\\
 
 				\midrule
 
-				POPE~\cite{pope} warm							& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Partial order}}		& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L N$}										&	\\
+				POPE \cite{pope} warm							& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Partial order}}		& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L N$}										&	\\
 
-				POPE~\cite{pope} cold							& 																& \onslide<1->{$\bm{{\nicefrac{N}{B}}}$}																		& \onslide<1->{Fully hiding}				& 																& \onslide<1->{$\bm{N}$}										&	\\
+				POPE \cite{pope} cold							& 																& \onslide<1->{$\bm{{\nicefrac{N}{B}}}$}																		& \onslide<1->{Fully hiding}				& 																& \onslide<1->{$\bm{N}$}										&	\\
 
 				\midrule
 
-				Logarithmic-BRC~\cite{practical-range-search}	& \onslide<1->{\textbf{---}}									& \onslide<1->{$\bm{r}$}																						& \onslide<1->{Same as SSE}					& \onslide<1->{\textbf{---}}									& \onslide<1->{$\log_2 N$}										&	\\
+				Logarithmic-BRC \cite{practical-range-search}	& \onslide<1->{\textbf{---}}									& \onslide<1->{$\bm{r}$}																						& \onslide<1->{Same as SSE}					& \onslide<1->{\textbf{---}}									& \onslide<1->{$\log_2 N$}										&	\\
 
 				\midrule
 
@@ -140,11 +140,70 @@
 
 		\vspace*{1ex}
 
-		For example: Square Root ORAM~\cite{oram-theory}, Hierarchical ORAM~\cite{oram-original}, Binary-Tree ORAM~\cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM~\cite{shortest-path-oram}, TP-ORAM~\cite{tp-oram}, \textbf{Path-ORAM}~\cite{path-oram} and TaORAM~\cite{taostore}.
-		\alert{ORAM incurs at least logarithmic communication overhead in the number of stored records.~\cite{oram-original}}
+		Square Root ORAM \cite{oram-theory}, Hierarchical ORAM \cite{oram-original}, Binary-Tree ORAM \cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM \cite{shortest-path-oram}, TP-ORAM \cite{tp-oram}, \textbf{Path-ORAM} \cite{path-oram} and TaORAM \cite{taostore}.
+		\alert{ORAM incurs at least logarithmic overhead in the number of stored records. \cite{oram-original}}
 
 		\begin{flushright}
 			\hyperlink{frame:epsolute-motivation}{\beamerreturnbutton{Back to \epsolute{}}}
+		\end{flushright}
+
+	\end{frame}
+
+	% chktex-file 1
+	% chktex-file 8
+
+	\begin{frame}[fragile,label={frame:appendix:dcpe}]
+
+		\frametitle{Distance Comparison Preserving Encryption algorithms \cite{dcpe}}
+
+		\justifying%
+
+		\newlength{\algSeparationLength}
+		\setlength{\algSeparationLength}{5.25em}
+
+		\begin{algorithm}[H]
+
+			\begin{pchstack}
+
+				\procedure[linenumbering]{\algo{KeyGen}{\secparam, \mathbb{S}}}{
+					s \sample \mathbb{S}		\\
+					\key \sample \bin^\secpar	\\
+					\pcreturn (s, \key)
+				}
+
+				\hspace*{\algSeparationLength}
+
+				\procedure[linenumbering]{\algo{Enc}{ (s, \key), \vec{m} }}{
+					n \sample \bin^\secpar														\\
+					\mathsf{coins}_n || \mathsf{coins}_u \gets \algo{prf}{\key, n}	\\
+					\vec{n} \sample \algo{Normal}{0, I_d; \mathsf{coins}_n}						\\
+					u \sample \algo{Uniform}{0, 1; \mathsf{coins}_u}							\\
+					x \gets \frac{s \beta}{4} \cdot \sqrt[d]{u}									\\
+					\vec{\delta} \gets \frac{\vec{n}}{\|\vec{n}\|} \cdot x						\\
+					\vec{c} \gets s \cdot \vec{m} + \vec{\delta}								\\
+					\pcreturn \vec{c}
+				}
+
+				\hspace*{\algSeparationLength}
+
+				\procedure[linenumbering]{\algo{Dec}{ (s, \key), (\vec{c}, n) }}{
+					\mathsf{coins}_n || \mathsf{coins}_u \gets \algo{prf}{\key, n}	\\
+					\vec{n} \sample \algo{Normal}{0, I_d; \mathsf{coins}_n}						\\
+					u \sample \algo{Uniform}{0, 1; \mathsf{coins}_u}							\\
+					x \gets \frac{s \beta}{4} \cdot \sqrt[d]{u}									\\
+					\vec{\delta} \gets \frac{\vec{n}}{\|\vec{n}\|} \cdot x						\\
+					\vec{m} \gets \frac{\vec{c} - \vec{\delta}}{s}								\\
+					\pcreturn \vec{m}
+				}
+
+			\end{pchstack}
+
+			\caption{Distance Comparison Preserving Encryption, adapted from \cite[Algorithm 2]{dcpe}}
+
+		\end{algorithm}
+
+		\begin{flushright}
+			\hyperlink{frame:dcpe}{\beamerreturnbutton{Back to Private \knn{}}}
 		\end{flushright}
 
 	\end{frame}

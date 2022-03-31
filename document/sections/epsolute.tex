@@ -11,20 +11,20 @@
 				\item<1->
 					What about \textbf{persistent} adversary (malicious script with \texttt{root} permissions)? \\
 					\begin{small}
-						Model: \alert{persistent}, query type: \alert{point} and \alert{range}
+						\indent{} Model: \alert{persistent}, query type: \alert{point} and \alert{range}
 					\end{small}
 				\item<1-> Need to protect \alert{access pattern} and \alert{communication volume}
 				\item<2->
 					Using ORAM to hide the access pattern \\
 					\begin{small}
-						Expensive, each request costs $\bigO{\log n}$ \hyperlink{frame:appendix:oram}{\beamerskipbutton{ORAM definition}}
+						\indent{} Expensive, each request costs $\bigO{\log n}$ \hyperlink{frame:appendix:oram}{\beamerskipbutton{ORAM definition}}
 					\end{small}
 				\item<3->
 					Adding fake records (noise) to the answer to hide the result size \\
 					\begin{small}
-						How much noise to add to have a guarantee and the least overhead? \\
-						Adding a constant or a uniformly sampled noise is not an option \\
-						Differential Privacy!
+						\indent{} How much noise to add to have a guarantee and the least overhead? \\
+						\indent{} Adding a constant or a uniformly sampled noise is not an option \\
+						\indent{} Differential Privacy!
 					\end{small}
 			\end{itemize}
 
@@ -53,17 +53,17 @@
 						\item<2->
 							Differential Privacy is a property of an algorithm \\
 							\begin{small}
-								What about $\epsilon$ and $\delta$?
+								\indent{} What about $\epsilon$ and $\delta$?
 							\end{small}
 						\item<3->
 							How to construct such an algorithm? \\
 							\begin{small}
-								Laplace Perturbation Method!
+								\indent{} Laplace Perturbation Method!
 							\end{small}
 						\item<4->
 							What if negative value is sampled? \\
 							\begin{small}
-								Cannot truncate one side, must shift entire distribution
+								\indent{} Cannot truncate one side, must shift entire distribution
 							\end{small}
 					\end{itemize}
 				\end{block}
@@ -153,7 +153,7 @@
 				\item
 					Single-threaded version is prohibitively slow, must parallelize \\
 					\begin{small}
-						Assume single-threaded solution generates $r$ real and $f$ fake records
+						\indent{} Assume single-threaded solution generates $r$ real and $f$ fake records
 					\end{small}
 
 				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines
@@ -219,7 +219,7 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.8\textwidth]{mechanism}
+			\includegraphics[width=\columnwidth]{mechanism}
 			\caption{
 				\centering
 				Different range-query mechanisms (log scale). \ifthenelse{1=1}{\hspace{\textwidth}}{} % hack
@@ -233,7 +233,7 @@
 
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.9\columnwidth]{scalability}
+			\includegraphics[width=\columnwidth]{scalability}
 			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{}}%
 		\end{figure}
 
