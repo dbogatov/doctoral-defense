@@ -4,44 +4,55 @@
 
 		\frametitle{OPE / ORE schemes}
 
-		\begin{adjustbox}{width=\linewidth}
-			\begin{tabular}{ l c c c c c }
+		\begin{table}
+			\begin{adjustbox}{width=\linewidth}
+				\begin{tabular}{ l c c c c c }
 
-				\toprule
+					\toprule
 
-				\multirow{2}{*}{Scheme}						& \multicolumn{2}{c}{\onslide<1->{Primitive usage}}																						& \onslide<1->{Ciphertext size,}																& \onslide<1->{Leakage}																\onslide<1->{\\ \cline{2-3}}
-				\rule{0pt}{10pt}							& \onslide<1->{Encryption}													& \onslide<1->{Comparison}									& \onslide<1->{or state size}																	& \onslide<1->{(in addition to inherent total order)}								\\
+					\multirow{2}{*}{Scheme}						& \multicolumn{2}{c}{\onslide<1->{Primitive usage}}																						& \onslide<1->{Ciphertext size,}																& \onslide<1->{Leakage}																\onslide<1->{\\ \cline{2-3}}
+					\rule{0pt}{10pt}							& \onslide<1->{Encryption}													& \onslide<1->{Comparison}									& \onslide<1->{or state size}																	& \onslide<1->{(in addition to inherent total order)}								\\
 
-				\toprule
+					\toprule
 
-				BCLO \cite{crypt-db-ope}					& \onslide<1->{$\bm{n}$ \textbf{HG}}										& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{$\approx$ Top half of the bits}}								\\
+					BCLO \cite{crypt-db-ope}					& \onslide<1->{$\bm{n}$ \textbf{HG}}										& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{$\approx$ Top half of the bits}}								\\
 
-				\midrule
+					\midrule
 
-				CLWW \cite{practical-ore}					& \onslide<1->{$n$ PRF} 													& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{Most-significant differing bit}}								\\
+					CLWW \cite{practical-ore}					& \onslide<1->{$n$ PRF} 													& \onslide<1->{none}										& \onslide<1->{$2n$}																			& \onslide<1->{\textbf{Most-significant differing bit}}								\\
 
-				\midrule
+					\midrule
 
-				\multirow{3}{*}{Lewi-Wu \cite{lewi-ore}}	& \onslide<1->{\boldmath{} $\nicefrac{2n}{d}$ \unboldmath{} \textbf{PRP}}	& \onslide<1->{\multirow{3}{*}{$\frac{n}{2d}$ Hash}}		& \onslide<1->{\multirow{3}{*}{$\frac{n}{d} \left(\lambda + n + 2^{d + 1} \right) + \lambda$}}	& \onslide<1->{\multirow{3}{*}{Most-significant differing block}}					\\
-															& \onslide<1->{$2 \frac{n}{d} \left( 2^d + 1 \right)$ PRF}					&															&																								&																					\\
-															& \onslide<1->{$\frac{n}{d} 2^d$ Hash}										&															&																								&																					\\
+					\multirow{3}{*}{Lewi-Wu \cite{lewi-ore}}	& \onslide<1->{\boldmath{} $\nicefrac{2n}{d}$ \unboldmath{} \textbf{PRP}}	& \onslide<1->{\multirow{3}{*}{$\frac{n}{2d}$ Hash}}		& \onslide<1->{\multirow{3}{*}{$\frac{n}{d} \left(\lambda + n + 2^{d + 1} \right) + \lambda$}}	& \onslide<1->{\multirow{3}{*}{Most-significant differing block}}					\\
+																& \onslide<1->{$2 \frac{n}{d} \left( 2^d + 1 \right)$ PRF}					&															&																								&																					\\
+																& \onslide<1->{$\frac{n}{d} 2^d$ Hash}										&															&																								&																					\\
 
-				\midrule
+					\midrule
 
-				\multirow{3}{*}{CLOZ \cite{adam-ore-v2}}	& \onslide<1->{$n$ PRF}														& \onslide<1->{\multirow{3}{*}{$\bm{n^2}$ \textbf{PPH}}}	& \onslide<1->{\multirow{3}{*}{$n \cdot h$}}													& \onslide<1->{\multirow{3}{*}{Equality pattern of most-significant differing bit}}	\\
-															& \onslide<1->{$n$ PPH}														&															&																								&																					\\
-															& \onslide<1->{1 PRP}														&															&																								&																					\\
+					\multirow{3}{*}{CLOZ \cite{adam-ore-v2}}	& \onslide<1->{$n$ PRF}														& \onslide<1->{\multirow{3}{*}{$\bm{n^2}$ \textbf{PPH}}}	& \onslide<1->{\multirow{3}{*}{$n \cdot h$}}													& \onslide<1->{\multirow{3}{*}{Equality pattern of most-significant differing bit}}	\\
+																& \onslide<1->{$n$ PPH}														&															&																								&																					\\
+																& \onslide<1->{1 PRP}														&															&																								&																					\\
 
-				\midrule
+					\midrule
 
-				FH-OPE \cite{fh-ope}						& \onslide<1->{1 Traversal}													& \onslide<1->{3 Traversals}								& \onslide<1->{$\bm{3 \cdot n \cdot N}$}														& \onslide<1->{Insertion order}														\\
+					FH-OPE \cite{fh-ope}						& \onslide<1->{1 Traversal}													& \onslide<1->{3 Traversals}								& \onslide<1->{$\bm{3 \cdot n \cdot N}$}														& \onslide<1->{Insertion order}														\\
 
-				\bottomrule
+					\bottomrule
 
-			\end{tabular}
-		\end{adjustbox}
+				\end{tabular}
+			\end{adjustbox}
+			\captionsetup{justification=justified}
+			\caption{
+				\cite[Table 1]{ore-benchmark-17}.
+				Primitive usage by OPE / ORE schemes.
+				Ordered by security rank --- most secure below.
+				$n$ is the input length in bits, $d$ is a block size for Lewi-Wu \cite{lewi-ore} scheme, $\lambda$ is a PRF output size, $N$ is a total data size, \textbf{HG} is a hyper-geometric distribution sampler, \textbf{PPH} is a property-preserving hash with $h$-bit outputs built with bilinear maps and \textbf{bolded} are weak points of the schemes.
+			}
+		\end{table}
 
-		\hyperlink{frame:ore}{\beamerreturnbutton{Back to ORE}}
+		\begin{flushright}
+			\hyperlink{frame:ore}{\beamerreturnbutton{Back to ORE}}
+		\end{flushright}
 
 	\end{frame}
 
@@ -49,42 +60,53 @@
 
 		\frametitle{Range query protocols}
 
-		\begin{adjustbox}{width=\linewidth}
-			\begin{tabular}{ l c c c c c c }
+		\begin{table}
+			\begin{adjustbox}{width=\linewidth}
+				\begin{tabular}{ l c c c c c c }
 
-				\toprule
+					\toprule
 
-				\multirow{2}{*}{Protocol}						& \multicolumn{2}{c}{\onslide<1->{{\IO} requests}}																																& \multirow{2}{*}{\onslide<1->{Leakage}}	& \multicolumn{2}{c}{\onslide<1->{Communication (result excluded)}}																&	\onslide<1->{\\ \cline{2-3} \cline{5-6}}
-				\rule{0pt}{10pt}								& \onslide<1->{Construction}									& \onslide<1->{Query}																							&											& \onslide<1->{Construction}									& \onslide<1->{Query} 											&	\\
+					\multirow{2}{*}{Protocol}						& \multicolumn{2}{c}{\onslide<1->{{\IO} requests}}																																& \multirow{2}{*}{\onslide<1->{Leakage}}	& \multicolumn{2}{c}{\onslide<1->{Communication (result excluded)}}																&	\onslide<1->{\\ \cline{2-3} \cline{5-6}}
+					\rule{0pt}{10pt}								& \onslide<1->{Construction}									& \onslide<1->{Query}																							&											& \onslide<1->{Construction}									& \onslide<1->{Query} 											&	\\
 
-				\toprule
+					\toprule
 
-				{\BPlus} tree with ORE							& \onslide<1->{$\log_B \frac{N}{B}$}							& \onslide<1->{$\log_B \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Same as ORE}}		& \onslide<1->{$1$}												& \onslide<1->{$1$}												&	\\
-				\midrule
+					{\BPlus} tree with ORE							& \onslide<1->{$\log_B \frac{N}{B}$}							& \onslide<1->{$\log_B \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Same as ORE}}		& \onslide<1->{$1$}												& \onslide<1->{$1$}												&	\\
+					\midrule
 
-				Kerschbaum \cite{florian-protocol}				& \onslide<1->{$\bm{\frac{N}{B}}$}								& \onslide<1->{$\log_2 \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Total order}}		& \onslide<1->{$\log_2 N$}										& \onslide<1->{$\log_2 N$}										&	\\
+					Kerschbaum \cite{florian-protocol}				& \onslide<1->{$\bm{\frac{N}{B}}$}								& \onslide<1->{$\log_2 \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Total order}}		& \onslide<1->{$\log_2 N$}										& \onslide<1->{$\log_2 N$}										&	\\
 
-				\midrule
+					\midrule
 
-				POPE \cite{pope} warm							& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Partial order}}		& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L N$}										&	\\
+					POPE \cite{pope} warm							& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L \frac{N}{B} + \frac{r}{B}$}																& \onslide<1->{\textbf{Partial order}}		& \multirow{2}{*}{\onslide<1->{$1$}}							& \onslide<1->{$\log_L N$}										&	\\
 
-				POPE \cite{pope} cold							& 																& \onslide<1->{$\bm{{\nicefrac{N}{B}}}$}																		& \onslide<1->{Fully hiding}				& 																& \onslide<1->{$\bm{N}$}										&	\\
+					POPE \cite{pope} cold							& 																& \onslide<1->{$\bm{{\nicefrac{N}{B}}}$}																		& \onslide<1->{Fully hiding}				& 																& \onslide<1->{$\bm{N}$}										&	\\
 
-				\midrule
+					\midrule
 
-				Logarithmic-BRC \cite{practical-range-search}	& \onslide<1->{\textbf{---}}									& \onslide<1->{$\bm{r}$}																						& \onslide<1->{Same as SSE}					& \onslide<1->{\textbf{---}}									& \onslide<1->{$\log_2 N$}										&	\\
+					Logarithmic-BRC \cite{practical-range-search}	& \onslide<1->{\textbf{---}}									& \onslide<1->{$\bm{r}$}																						& \onslide<1->{Same as SSE}					& \onslide<1->{\textbf{---}}									& \onslide<1->{$\log_2 N$}										&	\\
 
-				\midrule
+					\midrule
 
-				\multirow{2}{*}{ORAM}							& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	& \multirow{2}{*}{\onslide<1->{$\bm{{ \log_2 \frac{N}{B} \left( \log_B \frac{N}{B} + \frac{r}{B} \right) }}$}}	& \onslide<1->{Fully hiding}				& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	&	\\
-																&																&																												& \onslide<1->{(access pattern)}			&																&																&	\\
+					\multirow{2}{*}{ORAM}							& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	& \multirow{2}{*}{\onslide<1->{$\bm{{ \log_2 \frac{N}{B} \left( \log_B \frac{N}{B} + \frac{r}{B} \right) }}$}}	& \onslide<1->{Fully hiding}				& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	& \multirow{2}{*}{\onslide<1->{$\bm{{ \log^2 \frac{N}{B} }}$}}	&	\\
+																	&																&																												& \onslide<1->{(access pattern)}			&																&																&	\\
 
-				\bottomrule
+					\bottomrule
 
-			\end{tabular}
-		\end{adjustbox}
+				\end{tabular}
+			\end{adjustbox}
+			\captionsetup{justification=justified}
+			\caption{
+				\cite[Tables 2]{ore-benchmark-17}.
+				Performance of the range query protocols.
+				Ordered by security rank --- most secure below.
+				$N$ is a total data size, $B$ is an I/O page size, $L$ is a POPE tree branching factor, $r$ is the result size in records and \textbf{bolded} are weak points of the protocols.
+			}
+		\end{table}
 
+	\begin{flushright}
 		\hyperlink{frame:ore}{\beamerreturnbutton{Back to ORE}}
+	\end{flushright}
 
 	\end{frame}
 
@@ -140,7 +162,7 @@
 
 		\vspace*{1ex}
 
-		Square Root ORAM \cite{oram-theory}, Hierarchical ORAM \cite{oram-original}, Binary-Tree ORAM \cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM \cite{shortest-path-oram}, TP-ORAM \cite{tp-oram}, \textbf{Path-ORAM} \cite{path-oram} and TaORAM \cite{taostore}.
+		Square Root ORAM \cite{oram-theory}, Hierarchical ORAM \cite{oram-original}, Binary-Tree ORAM \cite{binary-tree-oram}, Interleave Buffer Shuffle Square Root ORAM \cite{shortest-path-oram}, TP-ORAM \cite{tp-oram}, \textbf{PathORAM} \cite{path-oram} and TaORAM \cite{taostore}.
 		\alert{ORAM incurs at least logarithmic overhead in the number of stored records. \cite{oram-original}}
 
 		\begin{flushright}

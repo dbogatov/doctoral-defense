@@ -32,7 +32,7 @@
 
 	\end{frame}
 
-	\begin{frame}{Differential Privacy, LPA and Sanitization}
+	\begin{frame}{Differential Privacy, LPA and Sanitation}
 
 		\begin{definition}[\alert{Differential Privacy}, adapted from~\cite{our-data-ourselves, differential-privacy-original}]
 			\justify%
@@ -215,6 +215,16 @@
 
 	\end{frame}
 
+	\begin{frame}{Experiments: scalability}
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=\columnwidth]{scalability}
+			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{}}%
+		\end{figure}
+
+	\end{frame}
+
 	\begin{frame}{Experiments: against other mechanisms}
 
 		\begin{figure}[h]
@@ -225,16 +235,6 @@
 				Different range-query mechanisms (log scale). \ifthenelse{1=1}{\hspace{\textwidth}}{} % hack
 				Default setting: $10^6$ \SI{4}{\kibi\byte} uniformly-sampled records with the range $10^4$.
 			}%
-		\end{figure}
-
-	\end{frame}
-
-	\begin{frame}{Experiments: scalability}
-
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=\columnwidth]{scalability}
-			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{}}%
 		\end{figure}
 
 	\end{frame}

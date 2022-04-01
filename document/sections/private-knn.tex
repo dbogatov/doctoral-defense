@@ -23,9 +23,9 @@
 				\end{small}
 
 			\item<4->
-				Our approach is to apply a \emph{property-preserving encryption} on objects \\
+				Our approach is to apply an \emph{approximate property-preserving encryption} on objects \\
 				\begin{small}
-					\indent{} Query protocol is then similar to OPE/ORE \\
+					\indent{} Query protocol is then similar to OPE / ORE \\
 					\indent{} Existing nearest-neighbor search algorithms then work naturally
 				\end{small}
 
@@ -41,7 +41,7 @@
 		\frametitle{Distance Comparison Preserving Encryption}
 
 		\[
-			\forall x, y, x \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
+			\forall x, y, z \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
 		\]
 
 		\begin{figure}[h]
@@ -76,14 +76,14 @@
 			\item<3->
 				Query is a 768-dimensional embedding asking for $k = \num{1000}$ closest documents \\
 				\begin{small}
-					\indent{} TREC has set of documents, set of topics (questions), and relevance judgments (right answers)
+					\indent{} TREC has a set of documents, a set of topics (questions), and relevance judgments (right answers)
 				\end{small}
 
 			\item<4->
 				We report result set distance and difference, and ranking quality Recall, MRR and nDCG \\
 				\begin{small}
 					\indent{} Set distance and difference measure pure \knn{} accuracy \\
-					\indent{} Recall, MRR and nDCG report ranking quality using relevance, common in informal retrieval literature
+					\indent{} Recall, MRR and nDCG report ranking quality using relevance, common in information retrieval literature
 				\end{small}
 
 		\end{itemize}
@@ -107,7 +107,7 @@
 				ML model trains on document-embedding pairs and predicts a \emph{set of words} from embedding \\
 				\begin{small}
 					\indent{} Model is an LSTM trained for 30 epochs \\
-					\indent{} Original attack used BookCorpus \cite{bookcorpus} dataset, but we wil use TREC
+					\indent{} Original attack used BookCorpus \cite{bookcorpus} dataset, but we will use TREC
 				\end{small}
 
 			\item<2->
