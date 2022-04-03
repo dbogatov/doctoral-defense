@@ -11,25 +11,19 @@
 			\item<2->
 				Nearest-neighbor search needs definitions of \emph{object} and \emph{distance} \\
 				\begin{small}
-					\indent{} Object could be 2D/3D location, or a document embedding (high-dimensional vector) \\
-					\indent{} Distance can be $\text{L}_\text{p}$ (usually, Euclidean, $p = 2$) or inner (dot) product
+					\indent{} \emph{Object} can be 2D/3D location, or a document embedding (high-dimensional vector) \\
+					\indent{} \emph{Distance} can be a Euclidean distance  or inner (dot) product distance \\
+					\indent{} \emph{Query} then can be ``5 closest restaurants'' or ``3 most similar documents''
 				\end{small}
 
 			\item<3->
-				Applications range from similarity search to geographical search \\
-				\begin{small}
-					\indent{} Object on a map is a 2D vector, query is to find $k$ nearest locations \\
-					\indent{} Document is a vector of words/features/topics, query is to find $k$ most similar documents
-				\end{small}
-
-			\item<4->
 				Our approach is to apply an \emph{approximate property-preserving encryption} on objects \\
 				\begin{small}
 					\indent{} Query protocol is then similar to OPE / ORE \\
 					\indent{} Existing nearest-neighbor search algorithms then work naturally
 				\end{small}
 
-			\item<5->
+			\item<4->
 				\textbf{Study how accuracy of search and efficiency of attacks drop with higher security}
 
 		\end{itemize}
@@ -44,10 +38,13 @@
 			\forall x, y, z \in \mathbb{X} : \algo{Dist}{x, y} < \algo{Dist}{x, z} - \beta \implies \algo{Dist}{f(x), f(y)} < \algo{Dist}{f(x), f(z)}
 		\]
 
+		If distance between $x$ and $z$ is larger than the distance between $x$ and $y$ by more than $\beta$, then the encryption of $z$ will be further than the encryption of $y$ from the encryption of $x$.
+
 		\begin{figure}[h]
 			\centering
-			\includegraphics[width=0.5\columnwidth]{dcpe}
+			\includegraphics[width=0.4\columnwidth]{dcpe}
 			\caption{
+				\the\columnwidth%
 				Distance Comparison Preserving Encryption scheme \cite{dcpe} \\
 				\hyperlink{frame:appendix:dcpe}{\beamerskipbutton{DCPE algorithms}}
 			}%

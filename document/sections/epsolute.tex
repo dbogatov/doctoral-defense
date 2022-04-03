@@ -79,7 +79,9 @@
 
 	\end{frame}
 
-	\begin{frame}{Differentially Private Outsourced Database System}
+	\begin{frame}[label={frame:epsolute-cdp-odb}]
+
+		\frametitle{Differentially Private Outsourced Database System}
 
 		\begin{definition}[\alert{Computationally Differentially Private Outsourced Database System}]
 			\justify%
@@ -99,38 +101,9 @@
 		\begin{itemize}
 			\item Entire view of the adversary is DP-protected
 			\item Implies protection against \textbf{communication volume} and \textbf{access pattern} leakages
-			\item Query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ is fixed (more on that next)
+			\item Query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ is fixed \hyperlink{frame:appendix:cdp-odb-adaptive}{\beamerskipbutton{See why}}
 			\item $\negl$ needed for the computational (as opposed to information-theoretical) DP definition
 		\end{itemize}
-
-	\end{frame}
-
-	\begin{frame}{On impossibility of adaptive queries}
-
-		\begin{block}{Why is the query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ fixed?}
-			\justify%
-
-			\begin{itemize}
-				\item<1-> Suppose neighboring medical databases differ in one record with a rare diagnosis ``Alzheimer's disease''
-				\item<2-> A medical professional, who is \textbf{a user (and not an adversary)} queries the database
-					\begin{itemize}
-						\item
-							for that diagnosis first \\
-							\texttt{SELECT name FROM patients WHERE condition = 'ALZ'} % chktex 32
-
-						\item
-							if there is a record, she queries the senior patients next \\
-							\texttt{SELECT name FROM patients WHERE age >= 65}
-
-						\item
-							otherwise she queries the general population, resulting in many more records \\
-							\texttt{SELECT name FROM patients}
-					\end{itemize}
-				\item<3-> \alert{Adversary can know the answer to the first query by observing result size of the second}
-				\item<3-> Efficient system cannot return nearly the same number of records in both cases, thus, the adversary can distinguish
-			\end{itemize}
-
-		\end{block}
 
 	\end{frame}
 
@@ -157,8 +130,8 @@
 					\end{small}
 
 				\item Split \user{} and \server{} state into \oramsNumber{} ORAMs, run as separate machines
-				\item Partition records randomly (by ID) into \oramsNumber{} partitions, generate \oramsNumber{} inverted indexes
-				\item What to do about \serverDS{}?
+				\item Partition records randomly (by ID) into \oramsNumber{} partitions, generate \oramsNumber{} record indexes
+				\item What to do about sanitizer \serverDS{}?
 			\end{itemize}
 		}
 
@@ -166,10 +139,9 @@
 			\begin{column}{0.5\textwidth}
 
 				\onslide<2->{
-					\begin{block}{\protocolSeparate{}: separate \serverDS{} per ORAM}
+					\begin{block}{\protocolSeparate{}: separate sanitizer \serverDS{} per ORAM}
 
 						\begin{itemize}[leftmargin=*]
-							\item Composition of disjoint datasets: take max $\epsilon$
 							\item Each ORAM incurs noise comparable to $f$
 							\item Win by splitting ORAM work $r$ into \oramsNumber{} partitions and lose by multiplying noise $f$ times \oramsNumber{}
 							\item That is, all ORAMs are processing $r + \oramsNumber f$ records in parallel
@@ -183,12 +155,11 @@
 			\begin{column}{0.5\textwidth}
 
 				\onslide<3->{
-					\begin{block}{\protocolShared{}: shared \serverDS{} for all ORAMs}
+					\begin{block}{\protocolShared{}: shared sanitizer \serverDS{} for all ORAMs}
 
 						\begin{itemize}[leftmargin=*]
 							\item Same number of total records per ORAM
-							\item Generated noise is larger than $f$ (say, $\alpha f$)
-							\item But it is split among \oramsNumber{} ORAMs
+							\item Generated noise is larger than $f$ (say, $\alpha f$), but split among \oramsNumber{} ORAMs
 							\item That is, all ORAMs are processing $r + \alpha f$ records in parallel
 						\end{itemize}
 
@@ -220,7 +191,7 @@
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=\columnwidth]{scalability}
-			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{}}%
+			\caption{Scalability measurements for \protocolShared{} and \protocolSeparate{} (\serverDS{} is a DP sanitizer)}%
 		\end{figure}
 
 	\end{frame}
@@ -233,7 +204,7 @@
 			\caption{
 				\centering
 				Different range-query mechanisms (log scale). \ifthenelse{1=1}{\hspace{\textwidth}}{} % hack
-				Default setting: $10^6$ \SI{4}{\kibi\byte} uniformly-sampled records with the range $10^4$.
+				Default setting: $10^6$ \SI{4}{\kibi\byte} uniformly-sampled records with the domain $10^4$.
 			}%
 		\end{figure}
 

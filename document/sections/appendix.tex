@@ -171,6 +171,41 @@
 
 	\end{frame}
 
+	\begin{frame}[label={frame:appendix:cdp-odb-adaptive}]
+
+		\frametitle{On impossibility of adaptive queries}
+
+		\begin{block}{Why is the query sequence $\fromNtoM{\query}{1}{m} \in \querySet^m$ fixed?}
+			\justify%
+
+			\begin{itemize}
+				\item<1-> Suppose neighboring medical databases differ in one record with a rare diagnosis ``Alzheimer's disease''
+				\item<2-> A medical professional, who is \textbf{a user (and not an adversary)} queries the database
+					\begin{itemize}
+						\item
+							for that diagnosis first \\
+							\texttt{SELECT name FROM patients WHERE condition = 'ALZ'} % chktex 32
+
+						\item
+							if there is a record, she queries the senior patients next \\
+							\texttt{SELECT name FROM patients WHERE age >= 65}
+
+						\item
+							otherwise she queries the general population, resulting in many more records \\
+							\texttt{SELECT name FROM patients}
+					\end{itemize}
+				\item<3-> \alert{Adversary can know the answer to the first query by observing result size of the second}
+				\item<3-> Efficient system cannot return nearly the same number of records in both cases, thus, the adversary can distinguish
+			\end{itemize}
+
+		\end{block}
+
+		\begin{flushright}
+			\hyperlink{frame:epsolute-cdp-odb}{\beamerreturnbutton{Back to \epsolute{}}}
+		\end{flushright}
+
+	\end{frame}
+
 	% chktex-file 1
 	% chktex-file 8
 
